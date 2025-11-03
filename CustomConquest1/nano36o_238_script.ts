@@ -509,7 +509,7 @@ export async function OnSpawnerSpawned(eventPlayer: mod.Player, eventSpawner: mo
 }
 //#endregion
 
-//#region Kills, Deaths, Assists, Revives. Code 30
+//#region Kills, Damages, Deaths, Assists, Revives. Code 30
 // [DONE] Called when a player gets a kill
 export async function OnPlayerEarnedKill(player: mod.Player, victim: mod.Player, deathType: mod.PlayerDeathTypes, weapon: mod.Weapons)
 {
@@ -537,6 +537,18 @@ export async function OnPlayerEarnedKill(player: mod.Player, victim: mod.Player,
     vc.deaths++;
   }
   LogFunctionDebug('OnPlayerEarnedKill', 30010);
+}
+// This will trigger when a Player takes damage.
+export async function OnPlayerDamaged(player: mod.Player, badguy: mod.Player, damageType: mod.DamageType, weaponUnlock: mod.WeaponUnlock)
+{
+  await mod.Wait(0.1);
+  const playerc = FindPlayer(player);
+  const otherGuy = FindPlayer(badguy);
+  otherGuy.score += 1;
+  if (playerc.isAISoldier)
+  {
+    DamagedBehavior(player, badguy, damageType, weaponUnlock);
+  }
 }
 // This will trigger whenever a Player dies.
 export async function OnPlayerDied(player: mod.Player,otherPlayer: mod.Player,deathType: mod.DeathType,weaponUnlock: mod.WeaponUnlock)
@@ -933,14 +945,9 @@ async function UpdateAIDifficulty()
     }
   }
 }
-// This will trigger when a Player takes damage.
-export async function OnPlayerDamaged(player: mod.Player, badguy: mod.Player, damageType: mod.DamageType, weaponUnlock: mod.WeaponUnlock)
+async function DamagedBehavior(player: mod.Player, badguy: mod.Player, damageType: mod.DamageType, weaponUnlock: mod.WeaponUnlock)
 {
-  await mod.Wait(0.1);
-  const playerc = FindPlayer(player);
-  if (playerc.isAISoldier)
-  {
-    // Stand your ground and defend.
+      // Stand your ground and defend.
     let position = mod.GetObjectPosition(player);
     let badguy_position = mod.GetObjectPosition(badguy);
     mod.AIMoveToBehavior(player, position);
@@ -1001,7 +1008,6 @@ export async function OnPlayerDamaged(player: mod.Player, badguy: mod.Player, da
       mod.AISetMoveSpeed(player, mod.MoveSpeed.InvestigateRun);
       LogFunctionDebug('OnPlayerDamaged_ResumeMission', 50206);
     }    
-  }
 }
 // This will trigger when an AI Soldier reaches target location.
 export async function OnAIMoveToSucceeded(player: mod.Player)
@@ -1292,11 +1298,11 @@ function UpdateTeamScores()
 }
 function GetTicketsBleedRate(capturePointsHeld: number, numberOfFlags:number): number
 {
-  let value = numberOfFlags - capturePointsHeld + 1;
-  if (value < 0 )
+  if(capturePointsHeld == 0)
   {
-    value = 0;
+    return 0 ;
   }
+  let value = numberOfFlags - capturePointsHeld + 1;
   return value;
   switch(capturePointsHeld)
   {
