@@ -446,24 +446,24 @@
             "name": "DeployCam",
             "type": "DeployCam",
             "right": {
-                "x": -0.565457,
+                "x": 1,
                 "y": 0,
-                "z": 0.824778
+                "z": 0
             },
             "up": {
-                "x": 0.577828,
-                "y": 0.713568,
-                "z": 0.396151
+                "x": 0,
+                "y": -4.37114e-08,
+                "z": -1
             },
             "front": {
-                "x": -0.588536,
-                "y": 0.700586,
-                "z": -0.403492
+                "x": 0,
+                "y": 1,
+                "z": -4.37114e-08
             },
             "position": {
-                "x": -20.6114,
+                "x": -612.424,
                 "y": 205.814,
-                "z": -123.975
+                "z": -186.863
             },
             "id": "DeployCam"
         },
@@ -2100,6 +2100,856 @@
                 "z": -211.3321
             },
             "id": "Node3D/Warehouse_01_A_L4"
+        },
+        {
+            "name": "Dumpster_04",
+            "type": "Dumpster_04",
+            "right": {
+                "x": -4.37114e-08,
+                "y": 0,
+                "z": -1
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 1,
+                "y": 0,
+                "z": -4.37114e-08
+            },
+            "position": {
+                "x": -678.5629,
+                "y": 132.19462,
+                "z": -189.416
+            },
+            "id": "Node3D/Dumpster_04"
+        },
+        {
+            "name": "Dumpster_07",
+            "type": "Dumpster_04",
+            "right": {
+                "x": -4.37114e-08,
+                "y": 0,
+                "z": -1
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 1,
+                "y": 0,
+                "z": -4.37114e-08
+            },
+            "position": {
+                "x": -591.9532,
+                "y": 129.11508,
+                "z": -185.993
+            },
+            "id": "Node3D/Dumpster_07"
+        },
+        {
+            "name": "Dumpster_08",
+            "type": "Dumpster_04",
+            "right": {
+                "x": 0.0348995,
+                "y": 0,
+                "z": -0.999391
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0.999391,
+                "y": 0,
+                "z": 0.0348995
+            },
+            "position": {
+                "x": -569.0767,
+                "y": 128.92416,
+                "z": -188.3041
+            },
+            "id": "Node3D/Dumpster_08"
+        },
+        {
+            "name": "Dumpster_05",
+            "type": "Dumpster_04",
+            "right": {
+                "x": 0.0749787,
+                "y": 0,
+                "z": -0.997185
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0.997185,
+                "y": 0,
+                "z": 0.0749787
+            },
+            "position": {
+                "x": -657.53668,
+                "y": 131.58202,
+                "z": -184.7441
+            },
+            "id": "Node3D/Dumpster_05"
+        },
+        {
+            "name": "Dumpster_06",
+            "type": "Dumpster_04",
+            "right": {
+                "x": -0.0174524,
+                "y": 0,
+                "z": -0.999848
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0.999848,
+                "y": 0,
+                "z": -0.0174524
+            },
+            "position": {
+                "x": -634.9465,
+                "y": 131.77198,
+                "z": -189.0147
+            },
+            "id": "Node3D/Dumpster_06"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x896",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -654.59924,
+                "y": 126.75123,
+                "z": -199.2003
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x896"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x897",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -654.59924,
+                "y": 126.75123,
+                "z": -208.2261
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x897"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x898",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -654.59924,
+                "y": 126.75123,
+                "z": -217.2379
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x898"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x899",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -654.59924,
+                "y": 126.75123,
+                "z": -226.2471
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x899"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x900",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -654.59924,
+                "y": 126.75123,
+                "z": -235.2399
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x900"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x901",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -663.58679,
+                "y": 126.75123,
+                "z": -235.2399
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x901"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x902",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -672.5986,
+                "y": 126.75123,
+                "z": -235.2399
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x902"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x903",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -681.6008,
+                "y": 126.75123,
+                "z": -235.2399
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x903"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x904",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -654.62628,
+                "y": 127.66607,
+                "z": -182.9626
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x904"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x911",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -639.8182,
+                "y": 127.66607,
+                "z": -184.5
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x911"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x912",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -626.6216,
+                "y": 127.66607,
+                "z": -184.5
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x912"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x921",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -608.5557,
+                "y": 126.0963,
+                "z": -184.4639
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x921"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x922",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -595.0847,
+                "y": 126.0963,
+                "z": -184.4639
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x922"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x923",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": -4.37114e-08,
+                "y": 0,
+                "z": -1
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 1,
+                "y": 0,
+                "z": -4.37114e-08
+            },
+            "position": {
+                "x": -595.0466,
+                "y": 126.0963,
+                "z": -184.4639
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x923"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x924",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": -4.37114e-08,
+                "y": 0,
+                "z": -1
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 1,
+                "y": 0,
+                "z": -4.37114e-08
+            },
+            "position": {
+                "x": -585.9929,
+                "y": 126.0963,
+                "z": -184.4639
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x924"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x925",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -562.696,
+                "y": 125.2992,
+                "z": -183.8912
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x925"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x913",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -626.6216,
+                "y": 127.66607,
+                "z": -175.5001
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x913"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x914",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -626.6216,
+                "y": 127.66607,
+                "z": -166.460626
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x914"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x915",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -626.6216,
+                "y": 127.66607,
+                "z": -157.41294
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x915"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x916",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -617.5283,
+                "y": 127.66607,
+                "z": -154.7671
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x916"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x917",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -606.1606,
+                "y": 127.66607,
+                "z": -154.7671
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x917"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x918",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -606.1606,
+                "y": 127.66607,
+                "z": -145.7137
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x918"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x919",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -606.1606,
+                "y": 127.66607,
+                "z": -136.6689
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x919"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x908",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -663.5921,
+                "y": 127.66607,
+                "z": -182.9626
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x908"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x909",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -672.5541,
+                "y": 127.66607,
+                "z": -182.9626
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x909"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x910",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -681.5771,
+                "y": 127.66607,
+                "z": -182.9626
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x910"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x905",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -654.62628,
+                "y": 127.66607,
+                "z": -173.94676
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x905"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x906",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -654.62628,
+                "y": 127.66607,
+                "z": -164.94334
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x906"
+        },
+        {
+            "name": "RefineryFoundation_01_A_896x907",
+            "type": "RefineryFoundation_01_A_896x896",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -654.62628,
+                "y": 127.66607,
+                "z": -155.9393
+            },
+            "id": "Node3D/RefineryFoundation_01_A_896x907"
         },
         {
             "name": "OilBarrel_Pallet_03",

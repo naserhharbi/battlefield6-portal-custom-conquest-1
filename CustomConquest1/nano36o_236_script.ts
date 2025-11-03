@@ -841,9 +841,11 @@ export async function SetAIWaypoint(player: PlayerClass)
   if(mod.GetSoldierState(player.player, mod.SoldierStateBool.IsAISoldier) && mod.GetSoldierState(player.player, mod.SoldierStateBool.IsAlive))
   {
     player.isAISoldier = true;
-    let emptyFlags = CaptureFlags.getEmptyCaptureFlags();
-    let myFlags = CaptureFlags.getMyCaptureFlags(player.team);
+    let emptyFlags = CaptureFlags.getEmptyCaptureFlags();    
     let hisFlags = CaptureFlags.getHisCaptureFlags(player.team);
+    let myFlags = CaptureFlags.getMyCaptureFlags(player.team);
+
+    MessageDebugAllPlayers(4, mod.Message(mod.stringkeys.debuglog4, emptyFlags.length, hisFlags.length, myFlags.length), WHITECOLOR);
 
     // select from which list we want to select our next waypoint.
     let selectedFlags = CaptureFlags.getMyCaptureFlags(player.team);
@@ -882,6 +884,9 @@ export async function SetAIWaypoint(player: PlayerClass)
       }
       // Make sure we get a new random index.
     }while(player.lastWaypointIndex==randomIndex);
+
+    MessageDebugAllPlayers(3, mod.Message(mod.stringkeys.debuglog3, selectedFlags.length, searchIteration, randomIndex), WHITECOLOR);
+
     // Update waypoint index.
     player.lastWaypointIndex = randomIndex;
     // Get capture point.
@@ -897,6 +902,7 @@ export async function SetAIWaypoint(player: PlayerClass)
     mod.AIMoveToBehavior(player.player, capturePoint_position);
     mod.AISetMoveSpeed(player.player, mod.MoveSpeed.Sprint);
     LogFunctionDebug('SetAIWaypoint', 50000);
+    MessageDebugAllPlayers(2, mod.Message(mod.stringkeys.debuglog2, 0, 0, 0), WHITECOLOR);
   }
 }
 async function UpdateAIDifficulty()
@@ -1076,8 +1082,7 @@ async function AIBotUpdate(player: PlayerClass)
       {        
         let distance = mod.DistanceBetween(mod.GetVehicleState(vehicle, mod.VehicleStateVector.VehiclePosition), myPosition);        
         if(distance < minVehicleDistance)
-        {
-          MessageDebugAllPlayers(2, mod.Message(mod.stringkeys.debuglog2, SizeOf(allVehicles), vehicleIndex, minVehicleDistance), WHITECOLOR);
+        {          
           // We want the closest vehicle.
           minVehicleDistance = distance;
           vehicleIndex = i;       
@@ -1088,8 +1093,7 @@ async function AIBotUpdate(player: PlayerClass)
   if(vehicleIndex != -1)
   {
     if(minVehicleDistance <= MinimumDistanceToEnterVehicle)
-    {
-      MessageDebugAllPlayers(3, mod.Message(mod.stringkeys.debuglog3, SizeOf(allVehicles), vehicleIndex, minVehicleDistance), WHITECOLOR);
+    {      
       // Enter the vehicle.
       let vehicle = ElementAt(allVehicles, vehicleIndex) as mod.Vehicle; 
       if(!mod.IsVehicleOccupied(vehicle))
@@ -1131,8 +1135,7 @@ async function AIBotUpdate(player: PlayerClass)
     mod.AIMoveToBehavior(player.player, enemyPosition);
     mod.AIDefendPositionBehavior(player.player, enemyPosition, 1, MinimumDistanceToDetectEnemies);
     mod.AISetMoveSpeed(player.player, mod.MoveSpeed.InvestigateRun);
-    mod.AISetTarget(enemy.player);
-    MessageDebugAllPlayers(4, mod.Message(mod.stringkeys.debuglog4, enemies.length, enemyIndex, distance), WHITECOLOR);
+    mod.AISetTarget(enemy.player);    
   }
   //#endregion
   
@@ -1271,8 +1274,8 @@ function UpdateTeamScores()
   team1ScoreTimer++;
   team2ScoreTimer++;
 
-  const team1Rate = GetTicketsBleedRate(team1PointsHeld);
-  const team2Rate = GetTicketsBleedRate(team2PointsHeld);
+  const team1Rate = GetTicketsBleedRate(team1PointsHeld, Capture_Points_Ids.length);
+  const team2Rate = GetTicketsBleedRate(team2PointsHeld, Capture_Points_Ids.length);
 
   if(team1ScoreTimer >= team1Rate && team1Rate > 0)
   {
@@ -1287,8 +1290,14 @@ function UpdateTeamScores()
     team_hq1_tickets--;
   }
 }
-function GetTicketsBleedRate(capturePointsHeld: number): number
+function GetTicketsBleedRate(capturePointsHeld: number, numberOfFlags:number): number
 {
+  let value = numberOfFlags - capturePointsHeld + 1;
+  if (value < 0 )
+  {
+    value = 0;
+  }
+  return value;
   switch(capturePointsHeld)
   {
     case 5:
@@ -1344,7 +1353,7 @@ function UpdateTimerUIPlayer(player:PlayerClass, time:mod.Message)
     }
     else
     {
-      player.roundStatusUI.openRoundStatus(time);
+      player.roundStatusUI.openRoundStatus(time, Capture_Points_Ids.length);
     }
   }
 }
@@ -1381,7 +1390,7 @@ function UpdateTicketsUIPlayer(player:PlayerClass, blueTicketsText:mod.Message, 
     }
     else
     {
-      player.roundStatusUI.openRoundStatus(blueTicketsText);
+      player.roundStatusUI.openRoundStatus(blueTicketsText, Capture_Points_Ids.length);
     }
     if (player.roundStatusUI.isOpenRoundStatus()) 
     {
@@ -1389,7 +1398,7 @@ function UpdateTicketsUIPlayer(player:PlayerClass, blueTicketsText:mod.Message, 
     }
     else
     {
-        player.roundStatusUI.openRoundStatus(redTicketsText);
+        player.roundStatusUI.openRoundStatus(redTicketsText, Capture_Points_Ids.length);
     }
   }
 }
@@ -1453,7 +1462,7 @@ function UpdateFlagsForPlayerUI(player:PlayerClass, flags:number[])
     }
     else
     {
-      player.roundStatusUI.openRoundStatus(mod.Message('Hello'));
+      player.roundStatusUI.openRoundStatus(mod.Message('Hello'), flags.length);
     }
   }
 }
@@ -2199,7 +2208,7 @@ class RoundStatusUI
     }
 
     //#region Open Close IsOpen
-    openRoundStatus(message: mod.Message)
+    openRoundStatus(message: mod.Message, numberOfFlags: number)
     {
         console.log("Open message UI");
         if (!this.#rootRoundStatusWidget)
@@ -2210,7 +2219,7 @@ class RoundStatusUI
             this.#createRedTickets(message);
             this.#createBlueTicketsProgressBar();
             this.#createRedTicketsProgressBar();
-            this.#createCaptureFlagsContainers(5);
+            this.#createCaptureFlagsContainers(numberOfFlags);
         }
         else
         {
@@ -2233,7 +2242,14 @@ class RoundStatusUI
             }
 
             // Flags.
-            this.refreshCapturePoints([0,0,0,0,0]);
+            let temp : number[];
+            temp = [];
+            for(let i = 0; i < numberOfFlags; i++)
+            {
+              // Add empty flags.
+              temp.push(0);
+            }
+            this.refreshCapturePoints(temp);
             if (this.#capturePoints)
             {
               for (let i = 0; i < this.#capturePoints.length; i++) 
