@@ -853,6 +853,84 @@
             "id": "Sector/CapturePoint_A/AI_Spawner8"
         },
         {
+            "name": "VehicleSpawner",
+            "P_AutoSpawnEnabled": true,
+            "type": "VehicleSpawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -781.4256,
+                "y": 133.58257,
+                "z": -174.63315
+            },
+            "id": "Sector/CapturePoint_A/VehicleSpawner"
+        },
+        {
+            "name": "VehicleSpawner2",
+            "P_AutoSpawnEnabled": true,
+            "type": "VehicleSpawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -781.4256,
+                "y": 136.39626,
+                "z": -225.8706
+            },
+            "id": "Sector/CapturePoint_A/VehicleSpawner2"
+        },
+        {
+            "name": "VehicleSpawner3",
+            "P_AutoSpawnEnabled": true,
+            "type": "VehicleSpawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -781.4256,
+                "y": 134.64481,
+                "z": -141.099
+            },
+            "id": "Sector/CapturePoint_A/VehicleSpawner3"
+        },
+        {
             "name": "CapturePoint_B",
             "ObjId": 200,
             "InfantrySpawnPoints_Team1": [
@@ -1341,6 +1419,84 @@
             "id": "Sector/CapturePoint_C/AI_Spawner4"
         },
         {
+            "name": "VehicleSpawner2",
+            "P_AutoSpawnEnabled": true,
+            "type": "VehicleSpawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -456.924,
+                "y": 133.42193,
+                "z": -165.5886
+            },
+            "id": "Sector/CapturePoint_C/VehicleSpawner2"
+        },
+        {
+            "name": "VehicleSpawner3",
+            "P_AutoSpawnEnabled": true,
+            "type": "VehicleSpawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -456.924,
+                "y": 128.826594,
+                "z": -215.3599
+            },
+            "id": "Sector/CapturePoint_C/VehicleSpawner3"
+        },
+        {
+            "name": "VehicleSpawner4",
+            "P_AutoSpawnEnabled": true,
+            "type": "VehicleSpawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -473.9164,
+                "y": 133.46102,
+                "z": -145.9745
+            },
+            "id": "Sector/CapturePoint_C/VehicleSpawner4"
+        },
+        {
             "name": "CapturePoint_D",
             "ObjId": 400,
             "InfantrySpawnPoints_Team1": [
@@ -1479,33 +1635,6 @@
                 "z": -230.7683
             },
             "id": "Sector/CapturePoint_D/SpawnPoint2"
-        },
-        {
-            "name": "VehicleSpawner",
-            "VehicleType": "Cheetah",
-            "P_AutoSpawnEnabled": true,
-            "type": "VehicleSpawner",
-            "right": {
-                "x": 1,
-                "y": 0,
-                "z": 0
-            },
-            "up": {
-                "x": 0,
-                "y": 1,
-                "z": 0
-            },
-            "front": {
-                "x": 0,
-                "y": 0,
-                "z": 1
-            },
-            "position": {
-                "x": -726.286,
-                "y": 134.72555,
-                "z": -146.0087
-            },
-            "id": "Sector/CapturePoint_D/VehicleSpawner"
         },
         {
             "name": "AI_Spawner",
@@ -1770,32 +1899,6 @@
                 "z": -173.3395
             },
             "id": "Sector/CapturePoint_E/SpawnPoint2"
-        },
-        {
-            "name": "VehicleSpawner",
-            "P_AutoSpawnEnabled": true,
-            "type": "VehicleSpawner",
-            "right": {
-                "x": 1,
-                "y": 0,
-                "z": 0
-            },
-            "up": {
-                "x": 0,
-                "y": 1,
-                "z": 0
-            },
-            "front": {
-                "x": 0,
-                "y": 0,
-                "z": 1
-            },
-            "position": {
-                "x": -637.6611,
-                "y": 135.35463,
-                "z": -89.9501
-            },
-            "id": "Sector/CapturePoint_E/VehicleSpawner"
         },
         {
             "name": "AI_Spawner",
