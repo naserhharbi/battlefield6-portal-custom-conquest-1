@@ -24,19 +24,19 @@ const AIBackfill = true;
 let AIDifficultyPercentage = 0.33;
 let HIDDEN_OBJECT_OFFSET = 70;
 let SPAWN_OBJECT_OFFSET = 80;
-const TEAM_HQ1 = mod.GetTeam(1); // HQ1
-const TEAM_HQ2 = mod.GetTeam(2); // HQ2
+const TOTAL_BOTS_COUNT = 36;
+const BOT_COUNT_PER_TEAM = TOTAL_BOTS_COUNT / 2;
 const CAPTURE_POINTS_LABELS = "ABCDEFGHIJHIJKLMNOPQRSTUVWXYZ";
 
 const NOFDEBUGLINES = 10;
  
 const AI_STATIC = false;
 const DEBUG = true;
-const DEBUG_00000 = true;
+const DEBUG_00000 = false;
 const DEBUG_10000 = false;
 const DEBUG_20000 = false;
 const DEBUG_30000 = false;
-const DEBUG_40000 = false;
+const DEBUG_40000 = true;
 const DEBUG_50000 = false;
 const DEBUG_60000 = false;
 const DEBUG_70000 = false;
@@ -52,6 +52,8 @@ let team_hq1_size = 0;
 let team_hq2_size = 0;
 let adjust_hq1_difficulty_once = false;
 let adjust_hq2_difficulty_once = false;
+let TEAM_HQ1: mod.Team;
+let TEAM_HQ2: mod.Team;
 
 // ---------------------- Config ----------------------
 let CAPTURE_POINTS: mod.CapturePoint[];
@@ -227,6 +229,10 @@ class PlayersClass
   }
 }
 let Players: PlayersClass;
+//let AIBotsThatLeftTheGame_HQ1: PlayersClass;
+//let AIBotsThatLeftTheGame_HQ2: PlayersClass;
+//let AIBotsTeamHQ1: PlayersClass;
+//let AIBotsTeamHQ2: PlayersClass;
 
 class CaptureFlagClass
 {
@@ -324,714 +330,80 @@ class CaptureFlagsClass
 let CaptureFlags : CaptureFlagsClass
 //#endregion
 
-//#region Game Start [DONE]
-export async function OnGameModeStarted()
-{
-  // Get game configuration from Spatial objects data.
-  GetGameConfigurationFromSpatialObjects2();
-  // Apply configurations from spatial objects data.
-  ApplyGameConfigurationFromSpatialObjects();
-  // Create players list.
-  Players = new PlayersClass();  
-  // Init capture points.
-  InitializeCapturePoints();
-  // Init team scores.
-  InitializeTeamsScores();
-  // Init scoreboard.
-  InitializeScoreBoard();
-  // Set max score.
-  mod.SetGameModeTargetScore(WINNING_SCORE);
-  // Start slow timer.
-  SlowerTickUpdate();
-  // Start fast timer.
-  HighTickUpdate();
-  // Start Spawner timer.
-  SpawnTickUpdate();
-  // Start AI scripts.
-  StartAIScripts();  
-}
-function GetGameConfigurationFromSpatialObjects()
-{
-  let configId = 900001;
-  let hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
-  let configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
-  WINNING_SCORE = configValue;
-  configId = 900002;
-  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
-  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
-  CAPTURE_POINT_DURATION = configValue;
-  configId = 900003;
-  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
-  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
-  MaxCaptureMultiplier = configValue;
-  configId = 900004;
-  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
-  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
-  MAX_PLAYER_COUNT = configValue;
-  configId = 900005;
-  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
-  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
-  RoundDurationMinutes = configValue;
-  configId = 900006;
-  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
-  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
-  MinimumDistanceToRevive = configValue; //meters.
-  configId = 900007;
-  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
-  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
-  MinimumDistanceToDetectEnemies = configValue; //meters.
-  configId = 900008;
-  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
-  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
-  MinimumDistanceToEnterVehicle = configValue; // meters.
-  configId = 900009;
-  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
-  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject)) / 100;
-  AIDifficultyPercentage = configValue;
-  configId = 900010;
-  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
-  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
-  HIDDEN_OBJECT_OFFSET = configValue;
-  configId = 900011;
-  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
-  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
-  SPAWN_OBJECT_OFFSET = configValue;
-}
-function GetGameConfigurationFromSpatialObjects2()
-{
-  WINNING_SCORE = 500;
-  CAPTURE_POINT_DURATION = 10;
-  MaxCaptureMultiplier = 1;
-  MAX_PLAYER_COUNT = 48;
-  RoundDurationMinutes = 10;
-  MinimumDistanceToRevive = 2; //meters.
-  MinimumDistanceToDetectEnemies = 5; //meters.
-  MinimumDistanceToEnterVehicle = 10; // meters.
-  AIDifficultyPercentage = 0.33;
-  HIDDEN_OBJECT_OFFSET = 70;
-  SPAWN_OBJECT_OFFSET = 80;
-}
-function ApplyGameConfigurationFromSpatialObjects()
-{
-  team_hq1_tickets = WINNING_SCORE;
-  team_hq2_tickets = WINNING_SCORE;
-  RoundDurationSeconds = 60 * RoundDurationMinutes;
-}
-// [Done]
-function InitializeCapturePoints()
-{
-  CaptureFlags = new CaptureFlagsClass();
-  CAPTURE_POINTS = [];
-  Capture_Points_Ids = GetCapturePointsIDs(mod.AllCapturePoints());
-  const numberOfCapturePoints = Capture_Points_Ids.length;
-  for (let i = 0; i < numberOfCapturePoints; i++) 
-  {      
-    // Get capture point from game.
-    const capturePoint = mod.GetCapturePoint(Capture_Points_Ids[i]);
-    // Add it to the list of capture points.
-    CAPTURE_POINTS.push(capturePoint);
-    // Enable capture point.
-    mod.EnableCapturePointDeploying(capturePoint, true);
-    mod.EnableGameModeObjective(capturePoint, true);
-    // Set capture point time.
-    mod.SetCapturePointCapturingTime(capturePoint, CAPTURE_POINT_DURATION);
-    // Set capture point loss time.
-    mod.SetCapturePointNeutralizationTime(capturePoint, CAPTURE_POINT_DURATION);
-    // Set capture point multiplier.
-    mod.SetMaxCaptureMultiplier(capturePoint, MaxCaptureMultiplier);
-
-    const flag = new CaptureFlagClass(capturePoint);
-    CaptureFlags.flagsList.push(flag);    
-  }
-}
-// [Done]
-function InitializeTeamsScores()
-{
-  mod.SetGameModeScore(TEAM_HQ1, 0);
-  mod.SetGameModeScore(TEAM_HQ2, 0);
-}
-// [Done]
-function InitializeScoreBoard()
-{
-  mod.SetScoreboardType(mod.ScoreboardType.CustomTwoTeams);
-  mod.SetScoreboardHeader(mod.Message(mod.stringkeys.teamtickets, team_hq1_tickets), mod.Message(mod.stringkeys.teamtickets, team_hq2_tickets));
-  mod.SetScoreboardColumnNames(mod.Message(mod.stringkeys.score), mod.Message(mod.stringkeys.kills), mod.Message(mod.stringkeys.deaths), mod.Message(mod.stringkeys.assists), mod.Message(mod.stringkeys.flags));
-}
-//#endregion
-
-//#region Game Ticks [DONE]
-// [Done]
-async function HighTickUpdate() 
-{
-    while (!gameEnded) 
-    {
-        await mod.Wait(0.1);
-        CaptureFlagUpdate();
-        CheckForWinState();
-        UpdatePlayerPositionDebug();
-    }
-}
-// [Done]
-async function SlowerTickUpdate() 
-{
-    while (!gameEnded) 
-    {
-        await mod.Wait(1);
-        RoundDurationSeconds--;
-        if(RoundDurationSeconds <= 0)
-        {
-          // If time runs out.
-          gameEnded = true;
-          CheckForWinStateWhenTimeIsUp();
-        }
-        if(!gameEnded)
-        {
-          // Update time
-          UpdateTimerUIAll();          
-          // Update tickets UI.
-          UpdateTeamScores();
-          // Update tickets UI.
-          UpdateTicketsUIAll();
-          // Update scoreboard.
-          UpdateScoreBoard();
-          // Update Capture Flags
-          UpdateAllFlags();
-          // Adjust AI Difficulty.
-          UpdateAIDifficulty();
-        }
-    }
-}
-// [Done]
-async function SpawnTickUpdate() 
-{
-    while (!gameEnded) 
-    {
-        await mod.Wait(1);
-        // Spawn AI players.
-        RespawnAIPlayers();
-    }
-}
-//#endregion
-
-//#region AI Spawn Management Code 40 [DONE]
-// [Done] This is called only once at the start of the round
-async function SpawnAIPlayers()
-{
-  let flag = true;
-  for (let i = 0; i < MAX_PLAYER_COUNT * 2; i++) 
-  {
-    await mod.Wait(0.25);
-    // Add loop here and call this function once at game start.
-    if(AIBackfill)
-    {
-      if(flag)
-      {
-        flag = false;
-        // Team 1.
-        const name1 = mod.Message(1000+ i + 1);
-        team_hq1_size++;
-        // Spawn to team_hq1
-        mod.SpawnAIFromAISpawner(GetAISpawner(TEAM_HQ1), name1, TEAM_HQ1);
-      }
-      else
-      {
-        flag = true;
-        // Team 2.
-        const name2 = mod.Message(2000+ i + 1);
-        team_hq2_size++;
-        // Spawn to team_hq2
-        mod.SpawnAIFromAISpawner(GetAISpawner(TEAM_HQ2), name2, TEAM_HQ2);
-      }
-    }
-  }
-}
-// [Done] This is used when a Bot leaves the game so we need to spawn a new bot in its place "respawn".
-function RespawnAIPlayers()
-{
-  const numberOfPlayers = Players.playersList.length;
-  for (let i = 0; i < numberOfPlayers; i++) 
-  {
-    const player = Players.playersList[i];
-    if(player.hasLeftTheGame)
-    {
-      player.shouldRedeploy = true;
-      if(mod.Equals(player.team,TEAM_HQ1))
-      {
-        const name1 = mod.Message(1000+ player.id + 1);
-        // Spawn to his team.
-        mod.SpawnAIFromAISpawner(GetAISpawner(player.team), name1, player.team);
-      }
-      else
-      {
-        const name2 = mod.Message(2000+ player.id + 1);
-        // Spawn to his team.
-        mod.SpawnAIFromAISpawner(GetAISpawner(player.team), name2, player.team);
-      }
-      
-      LogFunctionDebug('RespawnAIPlayers', 40000);
-    }
-  }
-}
-// [Done] Returns an available spawner for the team.
-function GetAISpawner(myTeam:mod.Team): mod.Spawner
-{
-  let myFlags = CaptureFlags.getMyCaptureFlags(myTeam);
-  if(myFlags.length > 0)
-  {
-    // We have captured flags that we can spawn from.
-    let randomFlagIndex = GetRandomIntNumber(0, myFlags.length - 1);
-    let spawners = CaptureFlags.getSpawnersIds(myFlags[randomFlagIndex].captureFlagId);
-    if(spawners.length == 0)
-    {
-      // There is an issue. Maybe there aren't any spawners added in the Godot.
-      // We do not have any flags so we need to spawn from the HQ
-      // Get spawner from any captured flags or from HQ if none.
-      if(mod.Equals(myTeam, TEAM_HQ1))
-      {
-        return mod.GetSpawner(GetRandomIntNumber(9001, 9001));
-      }
-      else
-      {
-        return mod.GetSpawner(GetRandomIntNumber(9002, 9002));
-      }    
-    }
-    let randomSpawnIndex = GetRandomIntNumber(0, spawners.length - 1);
-    return mod.GetSpawner(spawners[randomSpawnIndex]);
-  }
-  else
-  {
-    // We do not have any flags so we need to spawn from the HQ
-    // Get spawner from any captured flags or from HQ if none.
-    if(mod.Equals(myTeam, TEAM_HQ1))
-    {
-      return mod.GetSpawner(GetRandomIntNumber(9001, 9001));
-    }
-    else
-    {
-      return mod.GetSpawner(GetRandomIntNumber(9002, 9002));
-    }    
-  }  
-}
-// [Done] This will trigger when an AISpawner spawns an AI Soldier.
-export async function OnSpawnerSpawned(eventPlayer: mod.Player, eventSpawner: mod.Spawner)
-{  
-  let numberOfPlayers = Players.playersList.length;
-  for (let i = 0; i < numberOfPlayers; i++) 
-  {
-    const player = Players.playersList[i];
-    if(player.shouldRedeploy)
-    {
-      // Make sure the same AI Bot who left has respawned.
-      if(mod.Equals(player.name, player.name))
-      {        
-        // Reset flags.
-        player.shouldRedeploy = false;
-        player.hasLeftTheGame = false;
-        player.isInsideVehicle = false;
-        player.isInsideCapturePoint = false;
-        // Update the player
-        player.player = eventPlayer;
-
-        LogFunctionDebug('RespawnAIPlayers', 40001);        
-      }
-    }
-  }
-}
-//#endregion
-
-//#region Kills, Damages, Deaths, Assists, Revives. Code 30
-// [DONE] Called when a player gets a kill
-export async function OnPlayerEarnedKill(player: mod.Player, victim: mod.Player, deathType: mod.PlayerDeathTypes, weapon: mod.Weapons)
-{
-  await mod.Wait(0.1);
-  let pl = FindPlayer(player);
-  let vc = FindPlayer(victim);  
-  if(!mod.Equals(pl.player, vc.player))
-  {
-    pl.kills++;
-    pl.score += 100;
-    vc.deaths++;
-    if(mod.Equals(pl.team, TEAM_HQ1))
-    {
-      // Player is part of Team 1.
-      team_hq2_tickets--;
-    }
-    else
-    {
-      // Player is part of Team 2.
-      team_hq1_tickets--;
-    }    
-  }
-  else
-  {
-    // Player has killed himself.
-    vc.deaths++;
-  }
-  LogFunctionDebug('OnPlayerEarnedKill', 30010);
-}
-// This will trigger when a Player takes damage.
-export async function OnPlayerDamaged(eventPlayer: mod.Player, badguy: mod.Player, damageType: mod.DamageType, weaponUnlock: mod.WeaponUnlock)
-{
-  await mod.Wait(0.1);
-  const player = FindPlayer(eventPlayer);
-  const otherGuy = FindPlayer(badguy);
-  otherGuy.score += 1;
-  if (player.isAISoldier)
-  {
-    DamagedBehavior(player, badguy, damageType, weaponUnlock);
-  }
-}
-// This will trigger whenever a Player dies.
-export async function OnPlayerDied(eventPlayer: mod.Player,otherPlayer: mod.Player,deathType: mod.DeathType,weaponUnlock: mod.WeaponUnlock)
-{
-  await mod.Wait(1);  
-  const player = FindPlayer(eventPlayer);
-  // Reset revive flag if the person who died is a real player and not a bot. This to fix the issue where bots still want to revive human player even after they die.
-  if(!player.isAISoldier)
-  {
-    // If a human player died.
-    const myTeamMates = Players.getMyTeamMates(player);
-    // We need to reset this flag for my team.
-    for(let i = 0; i < myTeamMates.length; i++)
-    {
-      // Reset state to idle.
-      SetAIState(myTeamMates[i], AI_State.Idle)
-      myTeamMates[i].playerToRevive = myTeamMates[i].player;      
-    }
-  }
-  LogFunctionDebug('OnPlayerDied', 30020);
-}
-// Called when a player gets a kill that he assisted with.
-export async function OnPlayerEarnedKillAssist(eventPlayer: mod.Player, victim: mod.Player)
-{
-  await mod.Wait(0.1);  
-  let player = FindPlayer(eventPlayer);
-  player.assists++;
-  player.score += 50;
-  LogFunctionDebug('OnPlayerEarnedKillAssist', 30030);
-}
-// This will trigger when a Player is revived by another Player.
-export async function OnRevived(eventPlayer: mod.Player, eventOtherPlayer: mod.Player)
-{
-  await mod.Wait(0.1);  
-  let pl = FindPlayer(eventOtherPlayer);
-  pl.score += 100;
-  LogFunctionDebug('OnRevived', 30040);
-}
-//#endregion
-
-//#region Flags Code 10
-function CaptureFlagUpdate()
-{
-  const numberOfPlayers = Players.playersList.length;  
-  for (let i = 0; i < numberOfPlayers; i++) 
-  {
-    const player = Players.playersList[i];
-    if(player.isInsideCapturePoint)
-    {
-      UpdateCapturePointStatusUIPlayer(player);
-    }
-  }
-}
-// [DONE] This will trigger when a Player enters a CapturePoint capturing area.
-export async function OnPlayerEnterCapturePoint(eventPlayer: mod.Player, capturePoint: mod.CapturePoint)
-{  
-  // Show Team UI capture point is being captured
-  await mod.Wait(0.2);
-  // Get team owner of this flag.
-  let flagOwner = mod.GetCurrentOwnerTeam(capturePoint);
-  // Need to figure out if I am the one who entered the capture point so I can update my UI.
-  const player = FindPlayer(eventPlayer);
-  // This is used for humans to show the UI.
-  player.isInsideCapturePoint = true;
-  if(player.aiState == AI_State.RunningToFlag)
-  {
-    // Is this the intented flag to capture?
-    if(mod.Equals(capturePoint, player.nextCapturePoint))
-    {
-      // If we do not own the flag already.
-      if(!mod.Equals(player.team, flagOwner))
-      {
-        LogFunctionDebug('OnPlayerEnterCapturePoint',10201);
-        // Start defending the flag until it is captured.
-        player.isInsideCapturePoint = true;
-        // Update the current capture flag.
-        player.currentCapturePoint = capturePoint;
-        // Update the position of the capture point.
-        player.currentCapturePointPosition = player.nextCapturePointPosition;
-        // Update AI state. 
-        SetAIState(player, AI_State.Capturing);    
-      }
-      else
-      {
-        LogFunctionDebug('OnPlayerEnterCapturePoint',10202);
-        // We already own this flag so we need to select a new waypoint.
-        SetAIState(player, AI_State.Idle);
-      }
-    }
-  }
-  else
-  {
-    LogFunctionDebug('OnPlayerEnterCapturePoint',10203);
-  }
-}
-function PlayVoices(capturePoint:mod.CapturePoint, player:PlayerClass)
-{
-  // Play voices.
-  for (let i = 0; i < Players.playersList.length; i++) 
-  {    
-    let plr = Players.playersList[i];
-    // Actual player.
-    if(mod.Equals(plr.team, mod.GetCurrentOwnerTeam(capturePoint)) && mod.GetTeam(player.player) != plr.team)
-    {
-      // Play Voice Someone is trying to capture our flag.
-      mod.PlayVO(mod.GetVO(0), mod.VoiceOverEvents2D.ObjectiveCapturedEnemyGeneric, mod.VoiceOverFlags.Alpha, plr.player);
-    }
-    else
-    {
-      // Play voice we are capturing the flag.
-      mod.PlayVO(mod.GetVO(0), mod.VoiceOverEvents2D.ObjectiveCapturedGeneric, mod.VoiceOverFlags.Alpha, plr.player);
-    }
-  }  
-
-}
-// This will trigger when a Player exits a CapturePoint capturing area.
-export async function OnPlayerExitCapturePoint(player: mod.Player, capturePoint: mod.CapturePoint)
-{
-  await mod.Wait(0.2);
-  const playerc = FindPlayer(player);
-  playerc.isInsideCapturePoint = false;
-  HideCaptureStatusUIPlayer(playerc);
-  LogFunctionDebug('OnPlayerExitCapturePoint', 10300);
-}
-// This will trigger when a team begins capturing a CapturePoint.
-export async function OnCapturePointCapturing(capturePoint: mod.CapturePoint)
-{
-  await mod.Wait(0.2);
-  //Timer Flip Flop to fix issue with broken timer settings
-  mod.SetCapturePointNeutralizationTime(capturePoint, CAPTURE_POINT_DURATION);
-  LogFunctionDebug('OnCapturePointCapturing', 10400);
-}
-// [DONE] This will trigger when a team takes control of a CapturePoint.
-export async function OnCapturePointCaptured(capturePoint: mod.CapturePoint)
-{  
-  await mod.Wait(0.2);
-  //Timer Flip Flop to fix issue with broken timer settings
-  mod.SetCapturePointNeutralizationTime(capturePoint, CAPTURE_POINT_DURATION);
-  let newOwner = mod.GetCurrentOwnerTeam(capturePoint);
-  let flagId = mod.GetObjId(capturePoint);  
-  // Update owner.
-  CaptureFlags.changeOwner(flagId, newOwner);
-  // Get players inside the capture point.
-  let players = mod.GetPlayersOnPoint(capturePoint);
-  // Get number of 
-  let playersCount = SizeOf(players);
-  // We have captured an objective.  
-  for (let i = 0; i < playersCount; i++) 
-  {    
-    const player = FindPlayer(ElementAt(players, i) as mod.Player);
-    if(mod.Equals(player.team, newOwner))
-    {
-      // Add score.
-      // Give player 200 points.
-      player.score += 200;
-      player.flags++;
-      // Play We have captured an objective voice.
-      mod.PlayVO(mod.GetVO(0), mod.VoiceOverEvents2D.ObjectiveCapturedGeneric, mod.VoiceOverFlags.Alpha, player.player);
-      LogFunctionDebug('OnCapturePointCaptured', 10501);
-      SetAIState(player, AI_State.Idle);
-    }
-  }
-  // We have lost an objective.
-  const numberOfPlayers = Players.playersList.length;  
-  for (let i = 0; i < numberOfPlayers; i++) 
-  {
-    const loopPlayer = Players.playersList[i];
-    if(!mod.Equals(loopPlayer.team, newOwner))
-    {
-      // Play We have lost an objective voice.
-      mod.PlayVO(mod.GetVO(0), mod.VoiceOverEvents2D.ObjectiveCapturedEnemy, mod.VoiceOverFlags.Alpha, loopPlayer.player);
-    }
-  }
-}
-// This will trigger when a team loses control of a CapturePoint.
-export async function OnCapturePointLost(capturePoint: mod.CapturePoint)
-{
-  await mod.Wait(0.2);
-  // Show Team UI capture point has been lost.
-  let other_Team = mod.GetCurrentOwnerTeam(capturePoint);
-  // We have lost an objective.
-  const numberOfPlayers = Players.playersList.length;  
-  for (let i = 0; i < numberOfPlayers; i++) 
-  {
-    const loopPlayer = Players.playersList[i];
-    if(!mod.Equals(loopPlayer.team, other_Team))
-    {      
-      // Play We have lost an objective voice.
-      mod.PlayVO(mod.GetVO(0), mod.VoiceOverEvents2D.ObjectiveCapturedEnemy, mod.VoiceOverFlags.Alpha, loopPlayer.player);
-    }
-  }
-  LogFunctionDebug('OnCapturePointLost', 10600);
-}
-//#endregion
-
-//#region Deploy Code 20
-// Online players.
-export async function OnPlayerJoinGame (player: mod.Player)
-{
-  //AddPlayer(player);
-  // Assign ticket value.
-  //let joinedPlayer = FindPlayer(player);
-  //mod.EnablePlayerDeploy(player, true);
-  LogFunctionDebug('OnPlayerJoinGame', 20000);
-}
-// This will trigger when any player leaves the game.
-export async function OnPlayerLeaveGame(playerId: number)
-{
-  await mod.Wait(0.25);
-  // Flag Player has left the game.
-  FlagPlayerHasLeftTheGame(playerId);
-  // Need to respawn an AI.
-  //SpawnAIPlayer(playerId);
-  LogFunctionDebug('OnPlayerLeaveGame', 20100);
-
-}
-export async function OnPlayerSwitchTeam(eventPlayer: mod.Player, eventTeam: mod.Team)
-{
-  LogFunctionDebug('OnPlayerSwitchTeam', 20200);
-}
-export async function OnPlayerDeployed(eventPlayer: mod.Player)
-{
-  await mod.Wait(0.5);
-  if(mod.IsPlayerValid(eventPlayer))
-  {
-    AddPlayer(eventPlayer);
-    const player = FindPlayer(eventPlayer);
-    
-    if(mod.GetSoldierState(player.player, mod.SoldierStateBool.IsAISoldier))
-    {
-      player.isAISoldier = true;
-    }  
-    SetAIState(player, AI_State.Idle);
-    // Apply difficulty adjustment.
-    if(player.isAISoldier)
-    {
-      if(adjust_hq1_difficulty_once)
-      {
-        if(mod.Equals(player.team, TEAM_HQ1))
-        {
-          mod.SetPlayerMaxHealth(player.player,250);
-        }
-      }
-      if(adjust_hq2_difficulty_once)
-      {
-        if(mod.Equals(player.team, TEAM_HQ2))
-        {
-          mod.SetPlayerMaxHealth(player.player,250);
-        }
-      }
-    }  
-    LogFunctionDebug('OnPlayerDeployed', 20301);
-  }
-  else
-  {
-    mod.ForceManDown(eventPlayer);
-    LogFunctionDebug('OnPlayerDeployed', 20302);
-  }  
-}
-// This will trigger when the Player dies and returns to the deploy screen.
-export async function OnPlayerUndeploy(player: mod.Player)
-{
-  await mod.Wait(0.25);
-  LogFunctionDebug('OnPlayerUndeploy', 20400);
-}
-// [Done]
-function AddPlayer(player: mod.Player)
-{
-  const numberOfPlayers = Players.playersList.length;
-  if(numberOfPlayers > MAX_PLAYER_COUNT)
-  {  
-    // To prevent memory leak.
-    //LogFunctionDebugAllPlayers('AddPlayer', 20801);
-    return;
-  }
-  
-  let isFound = false;
-  for (let i = 0; i < numberOfPlayers; i++) 
-  {
-    const loopPlayer = Players.playersList[i];
-    if(mod.Equals(player, loopPlayer.player))
-    {
-      isFound = true;
-    }    
-  }
-  if(!isFound)
-  {
-    let pl:PlayerClass
-    pl = new PlayerClass(player);
-    //mod.SetVariable(mod.ObjectVariable(player, PlayerNameIndex), pl.name);
-    
-
-    Players.playersList.push(pl);
-  }
-  LogFunctionDebug('AddPlayer', 20500);
-}
-// [Done]
-function FlagPlayerHasLeftTheGame(playerId:number)
-{
-  const numberOfPlayers = Players.playersList.length;
-  for (let i = 0; i < numberOfPlayers; i++) 
-  {
-    const loopPlayer = Players.playersList[i];
-    if(mod.Equals(playerId, loopPlayer.id))
-    {
-      loopPlayer.hasLeftTheGame = true;
-
-      if(mod.Equals(loopPlayer.team, TEAM_HQ1))
-      {
-        team_hq1_size--;
-      }
-      else
-      {
-        team_hq2_size--;
-      }
-      LogFunctionDebug('AddPlayer', 20601);
-      break;
-    }    
-  }
-}
-//#endregion
-
-//#region Vehicles Code 40
-// This will trigger when a Player enters a Vehicle seat.
-export async function OnPlayerEnterVehicle(eventPlayer: mod.Player, eventVehicle: mod.Vehicle)
-{
-  let player = FindPlayer(eventPlayer);
-  player.isInsideVehicle = true;
-
-}
-// This will trigger when a Player enters a Vehicle seat.
-export async function OnPlayerEnterVehicleSeat(eventPlayer: mod.Player, eventVehicle: mod.Vehicle, eventSeat: mod.Object)
-{
-  let player = FindPlayer(eventPlayer);
-  player.isInsideVehicle = true;
-
-}
-// This will trigger when a Player exits a Vehicle.
-export async function OnPlayerExitVehicle(eventPlayer: mod.Player, eventVehicle: mod.Vehicle)
-{
-  let player = FindPlayer(eventPlayer);
-  player.isInsideVehicle = false;
-}
-//#endregion
-
 //#region AI Bot Behavior Code 50
 async function StartAIScripts()
 {
   // Spawn AI Bots at start of the round.
   SpawnAIPlayers();
+  // Start Spawner timer.
+  SpawnTickUpdate();
   // AI behavior.
   AIBotsUpdate();  
+}
+async function AIBotsUpdate()
+{
+  while (!gameEnded) 
+  {
+    await mod.Wait(0.2);
+    for(let i = 0; i < Players.playersList.length; i++)
+    {
+      let player = Players.playersList[i];
+      // Only apply to AI Bots.
+      if(player.isAISoldier)
+      {
+        AIBotUpdate(player);
+      }
+    }
+  }
+}
+// AI bot frame update.
+function AIBotUpdate(player: PlayerClass)
+{
+  let myPosition = mod.GetObjectPosition(player.player);
+  let myTeamMates = Players.getMyTeamMates(player);
+  //let enemies = Players.getAliveEnemyTeamMates(player.team);
+  //let allVehicles = mod.AllVehicles();
+
+  switch(player.aiState)
+  {
+    case AI_State.Idle:
+      // We need to capture a flag.
+      SetAIWaypoint(player);
+      break;
+    case AI_State.Reviving:
+      // Keep going to the human player to revive.
+      CheckForRevive(player, myTeamMates);
+      break;
+    case AI_State.RunningToFlag:
+      // Keep going to flag.
+      // Check for downed human players.
+      if(!CheckForDownedPlayersToRevive(player))
+      {
+        // Check for engagement.
+        // Update movement speed depending of surroundings.
+        UpdateMovementSpeed(player);
+        // Check for vehicles.        
+      }      
+      break;
+    case AI_State.Capturing:
+      // Keep defending the flag.
+      // Check for downed human players.
+      if(!CheckForDownedPlayersToRevive(player))
+      {
+        // Defend the flag.
+        DefendCapturePoint(player);
+
+      }
+      break;
+    case AI_State.Engaging:
+      // Check for downed human players.
+      if(!CheckForDownedPlayersToRevive(player))
+      {
+        // Enagage with enemy.
+        EngageScript(player);
+      }
+      break;
+  }
 }
 // Selects a capture point for the AI Bot.
 function SetAIWaypoint(player: PlayerClass)
@@ -1175,6 +547,7 @@ function UpdateAIDifficulty()
 function DamagedBehavior(player: PlayerClass, badguy: mod.Player, damageType: mod.DamageType, weaponUnlock: mod.WeaponUnlock)
 {
   SetAIState(player, AI_State.Engaging);
+  SetAIState(player, AI_State.Idle);
   player.engagedBadguy = badguy;    
 }
 // This will trigger when an AI Soldier reaches target location.
@@ -1193,22 +566,6 @@ export async function OnAIMoveToFailed(eventPlayer: mod.Player)
   let player = FindPlayer(eventPlayer);
   SetAIState(player, AI_State.Idle);
 }
-async function AIBotsUpdate()
-{
-  while (!gameEnded) 
-  {
-    await mod.Wait(0.2);
-    for(let i = 0; i < Players.playersList.length; i++)
-    {
-      let player = Players.playersList[i];
-      // Only apply to AI Bots.
-      if(player.isAISoldier && mod.IsPlayerValid(player.player))
-      {
-        AIBotUpdate(player);
-      }
-    }
-  }
-}        
 // Sets the state of the ai bot.
 function SetAIState(aiBot: PlayerClass, aiState:AI_State)
 {
@@ -1216,55 +573,6 @@ function SetAIState(aiBot: PlayerClass, aiState:AI_State)
   {
     aiBot.aiState = aiState;
     //LogFunctionDebug('SetAIState', aiBot.aiState);
-  }
-}
-// AI bot frame update.
-async function AIBotUpdate(player: PlayerClass)
-{
-  let myPosition = mod.GetObjectPosition(player.player);
-  let myTeamMates = Players.getMyTeamMates(player);
-  //let enemies = Players.getAliveEnemyTeamMates(player.team);
-  //let allVehicles = mod.AllVehicles();
-
-  switch(player.aiState)
-  {
-    case AI_State.Idle:
-      // We need to capture a flag.
-      SetAIWaypoint(player);
-      break;
-    case AI_State.Reviving:
-      // Keep going to the human player to revive.
-      CheckForRevive(player, myTeamMates);
-      break;
-    case AI_State.RunningToFlag:
-      // Keep going to flag.
-      // Check for downed human players.
-      if(!CheckForDownedPlayersToRevive(player))
-      {
-        // Check for engagement.
-        // Update movement speed depending of surroundings.
-        UpdateMovementSpeed(player);
-        // Check for vehicles.        
-      }      
-      break;
-    case AI_State.Capturing:
-      // Keep defending the flag.
-      // Check for downed human players.
-      if(!CheckForDownedPlayersToRevive(player))
-      {
-        // Defend the flag.
-        DefendCapturePoint(player);
-
-      }
-      break;
-    case AI_State.Engaging:
-      // Check for downed human players.
-      if(!CheckForDownedPlayersToRevive(player))
-      {
-        // Enagage with enemy.
-        EngageScript(player);
-      }
-      break;
   }
 }
 function UpdateMovementSpeed(player: PlayerClass)
@@ -1297,6 +605,7 @@ function CheckForEnemiesUpdate(myPosition:mod.Vector, enemies:PlayerClass[]):boo
 }
 function CheckForDownedPlayersToRevive(player:PlayerClass): boolean
 {
+  return false;
   // Look for someone to revive.
   let myRealTeamMates = Players.getMyRealTeamMates(player);
   for(let i = 0; i < myRealTeamMates.length; i++)
@@ -1381,6 +690,730 @@ function EngageScript(player:PlayerClass)
 function DefendCapturePoint(player:PlayerClass)
 {
   SetAIBotDefend(player, player.destinationPosition, 1, 20);
+}
+//#endregion
+
+//#region AI Spawn Management Code 40 [DONE]
+// [Done] This is called only once at the start of the round
+async function SpawnAIPlayers()
+{
+  // HQ1.
+  for (let i = 1; i <= BOT_COUNT_PER_TEAM; i++) 
+  {
+    await mod.Wait(0.25);
+    // Add loop here and call this function once at game start.
+    if(AIBackfill)
+    {
+      // Team 1.
+      let name1 = mod.Message(i);
+      //team_hq1_size++;
+      // Spawn to team_hq1
+      mod.SpawnAIFromAISpawner(GetAISpawner(TEAM_HQ1), name1, TEAM_HQ1);
+    }
+  }
+  // HQ2.
+  for (let i = BOT_COUNT_PER_TEAM + 1; i <= MAX_PLAYER_COUNT; i++) 
+  {
+    await mod.Wait(0.25);
+    // Add loop here and call this function once at game start.
+    if(AIBackfill)
+    {
+      // Team 2.
+      let name2 = mod.Message(i);
+      //team_hq2_size++;
+      // Spawn to team_hq2
+      mod.SpawnAIFromAISpawner(GetAISpawner(TEAM_HQ2), name2, TEAM_HQ2);
+    }
+  }
+}
+// [Done] This is used when a Bot leaves the game so we need to spawn a new bot in its place "respawn".
+async function RespawnAIPlayers()
+{
+  return;
+  // HQ1.
+  
+  // Sometimes players drop for some reason.
+  LogFunctionDebug('RespawnAIPlayers', 40000);
+}
+function CheckTeamMemebers()
+{
+  let players = mod.AllPlayers();
+  let numberOfPlayers = SizeOf(players);
+  for (let i = 0; i < numberOfPlayers; i++) 
+  {
+    let player = ElementAt(players,i) as mod.Player;
+    let playerId = mod.GetObjId(player);
+    let playerTeam = mod.GetTeam(player);
+
+    if(playerId <= BOT_COUNT_PER_TEAM && mod.Equals(playerTeam, TEAM_HQ2))
+    {
+      // We have an issue.
+      MessageDebugAllPlayers(0, playerId);
+    }
+  }
+
+}
+// [Done] Returns an available spawner for the team.
+function GetAISpawner(myTeam:mod.Team): mod.Spawner
+{
+  let myFlags = CaptureFlags.getMyCaptureFlags(myTeam);
+  if(mod.Equals(myTeam, TEAM_HQ1))
+  {
+    return mod.GetSpawner(9001);
+  }
+  else
+  {
+    return mod.GetSpawner(9002);
+  }    
+  if(myFlags.length > 0)
+  {
+    // We have captured flags that we can spawn from.
+    let randomFlagIndex = GetRandomIntNumber(0, myFlags.length - 1);
+    let spawners = CaptureFlags.getSpawnersIds(myFlags[randomFlagIndex].captureFlagId);
+    if(spawners.length == 0)
+    {
+      // There is an issue. Maybe there aren't any spawners added in the Godot.
+      // We do not have any flags so we need to spawn from the HQ
+      // Get spawner from any captured flags or from HQ if none.
+      if(mod.Equals(myTeam, TEAM_HQ1))
+      {
+        return mod.GetSpawner(GetRandomIntNumber(9001, 9001));
+      }
+      else
+      {
+        return mod.GetSpawner(GetRandomIntNumber(9002, 9002));
+      }    
+    }
+    let randomSpawnIndex = GetRandomIntNumber(0, spawners.length - 1);
+    return mod.GetSpawner(spawners[randomSpawnIndex]);
+  }
+  else
+  {
+    // We do not have any flags so we need to spawn from the HQ
+    // Get spawner from any captured flags or from HQ if none.
+    if(mod.Equals(myTeam, TEAM_HQ1))
+    {
+      return mod.GetSpawner(GetRandomIntNumber(9001, 9001));
+    }
+    else
+    {
+      return mod.GetSpawner(GetRandomIntNumber(9002, 9002));
+    }    
+  }  
+}
+// [Done] This will trigger when an AISpawner spawns an AI Soldier.
+export async function OnSpawnerSpawned(eventPlayer: mod.Player, eventSpawner: mod.Spawner)
+{  
+  let aiBotId = mod.GetObjId(eventPlayer);
+  let numberOfPlayers = Players.playersList.length;
+  let found = false;
+  for (let i = 0; i < numberOfPlayers; i++) 
+  {
+    let player = Players.playersList[i];
+    if(1==1)//(player.shouldRedeploy)
+    {
+      // Make sure the same AI Bot who left has respawned.
+      if(player.id == aiBotId)
+      {
+        found = true;
+        mod.SetTeam(eventPlayer, player.team);
+        // Reset flags.
+        player.shouldRedeploy = false;
+        player.hasLeftTheGame = false;
+        player.isInsideVehicle = false;
+        player.isInsideCapturePoint = false;
+        SetAIState(player, AI_State.Idle);
+        // Update the player
+        player.player = eventPlayer;
+
+        LogFunctionDebug('RespawnAIPlayers', 40001);        
+      }
+    }
+  }
+  if(!found)
+  {
+    LogFunctionDebugAllPlayers('OnSpawnerSpawned',40002);
+  }
+}
+//#endregion
+
+//#region Game Start [DONE]
+export async function OnGameModeStarted()
+{
+  // Get game configuration from Spatial objects data.
+  GetGameConfigurationFromSpatialObjects2();
+  // Apply configurations from spatial objects data.
+  ApplyGameConfigurationFromSpatialObjects();
+
+  TEAM_HQ1 = mod.GetTeam(1); // HQ1
+  TEAM_HQ2 = mod.GetTeam(2); // HQ2
+  // Create players list.
+  Players = new PlayersClass();  
+  //AIBotsThatLeftTheGame_HQ1 = new PlayersClass();  
+  //AIBotsThatLeftTheGame_HQ2 = new PlayersClass();  
+  //AIBotsTeamHQ1 = new PlayersClass();  
+  //AIBotsTeamHQ2 = new PlayersClass();  
+  // Init capture points.
+  InitializeCapturePoints();
+  // Init team scores.
+  InitializeTeamsScores();
+  // Init scoreboard.
+  InitializeScoreBoard();
+  // Set max score.
+  mod.SetGameModeTargetScore(WINNING_SCORE);
+  // Start slow timer.
+  SlowerTickUpdate();
+  // Start fast timer.
+  HighTickUpdate();
+  // Start AI scripts.
+  StartAIScripts();  
+}
+function GetGameConfigurationFromSpatialObjects()
+{
+  let configId = 900001;
+  let hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
+  let configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
+  WINNING_SCORE = configValue;
+  configId = 900002;
+  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
+  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
+  CAPTURE_POINT_DURATION = configValue;
+  configId = 900003;
+  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
+  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
+  MaxCaptureMultiplier = configValue;
+  configId = 900004;
+  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
+  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
+  MAX_PLAYER_COUNT = configValue;
+  MAX_PLAYER_COUNT = TOTAL_BOTS_COUNT;
+  configId = 900005;
+  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
+  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
+  RoundDurationMinutes = configValue;
+  configId = 900006;
+  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
+  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
+  MinimumDistanceToRevive = configValue; //meters.
+  configId = 900007;
+  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
+  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
+  MinimumDistanceToDetectEnemies = configValue; //meters.
+  configId = 900008;
+  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
+  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
+  MinimumDistanceToEnterVehicle = configValue; // meters.
+  configId = 900009;
+  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
+  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject)) / 100;
+  AIDifficultyPercentage = configValue;
+  configId = 900010;
+  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
+  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
+  HIDDEN_OBJECT_OFFSET = configValue;
+  configId = 900011;
+  hiddenObject = mod.GetObjectPosition(mod.GetSpatialObject(configId));
+  configValue = mod.RoundToInteger(mod.XComponentOf(hiddenObject));
+  SPAWN_OBJECT_OFFSET = configValue;
+}
+function GetGameConfigurationFromSpatialObjects2()
+{
+  WINNING_SCORE = 500;
+  CAPTURE_POINT_DURATION = 10;
+  MaxCaptureMultiplier = 1;
+  MAX_PLAYER_COUNT = 48;
+  MAX_PLAYER_COUNT = TOTAL_BOTS_COUNT;
+  RoundDurationMinutes = 10;
+  MinimumDistanceToRevive = 2; //meters.
+  MinimumDistanceToDetectEnemies = 5; //meters.
+  MinimumDistanceToEnterVehicle = 10; // meters.
+  AIDifficultyPercentage = 0.33;
+  HIDDEN_OBJECT_OFFSET = 70;
+  SPAWN_OBJECT_OFFSET = 80;
+}
+function ApplyGameConfigurationFromSpatialObjects()
+{
+  team_hq1_tickets = WINNING_SCORE;
+  team_hq2_tickets = WINNING_SCORE;
+  RoundDurationSeconds = 60 * RoundDurationMinutes;
+}
+// [Done]
+function InitializeCapturePoints()
+{
+  CaptureFlags = new CaptureFlagsClass();
+  CAPTURE_POINTS = [];
+  Capture_Points_Ids = GetCapturePointsIDs(mod.AllCapturePoints());
+  const numberOfCapturePoints = Capture_Points_Ids.length;
+  for (let i = 0; i < numberOfCapturePoints; i++) 
+  {      
+    // Get capture point from game.
+    const capturePoint = mod.GetCapturePoint(Capture_Points_Ids[i]);
+    // Add it to the list of capture points.
+    CAPTURE_POINTS.push(capturePoint);
+    // Enable capture point.
+    mod.EnableCapturePointDeploying(capturePoint, true);
+    mod.EnableGameModeObjective(capturePoint, true);
+    // Set capture point time.
+    mod.SetCapturePointCapturingTime(capturePoint, CAPTURE_POINT_DURATION);
+    // Set capture point loss time.
+    mod.SetCapturePointNeutralizationTime(capturePoint, CAPTURE_POINT_DURATION);
+    // Set capture point multiplier.
+    mod.SetMaxCaptureMultiplier(capturePoint, MaxCaptureMultiplier);
+
+    const flag = new CaptureFlagClass(capturePoint);
+    CaptureFlags.flagsList.push(flag);    
+  }
+}
+// [Done]
+function InitializeTeamsScores()
+{
+  mod.SetGameModeScore(TEAM_HQ1, 0);
+  mod.SetGameModeScore(TEAM_HQ2, 0);
+}
+// [Done]
+function InitializeScoreBoard()
+{
+  mod.SetScoreboardType(mod.ScoreboardType.CustomTwoTeams);
+  mod.SetScoreboardHeader(mod.Message(mod.stringkeys.teamtickets, team_hq1_tickets), mod.Message(mod.stringkeys.teamtickets, team_hq2_tickets));
+  mod.SetScoreboardColumnNames(mod.Message(mod.stringkeys.score), mod.Message(mod.stringkeys.kills), mod.Message(mod.stringkeys.deaths), mod.Message(mod.stringkeys.assists), mod.Message(mod.stringkeys.flags));
+}
+//#endregion
+
+//#region Game Ticks [DONE]
+// [Done]
+async function HighTickUpdate() 
+{
+    while (!gameEnded) 
+    {
+        await mod.Wait(0.1);
+        CaptureFlagUpdate();
+        CheckForWinState();
+        UpdatePlayerPositionDebug();
+    }
+}
+// [Done]
+async function SlowerTickUpdate() 
+{
+    while (!gameEnded) 
+    {
+        await mod.Wait(1);
+        RoundDurationSeconds--;
+        if(RoundDurationSeconds <= 0)
+        {
+          // If time runs out.
+          gameEnded = true;
+          CheckForWinStateWhenTimeIsUp();
+        }
+        if(!gameEnded)
+        {
+          // Update time
+          UpdateTimerUIAll();          
+          // Update tickets UI.
+          UpdateTeamScores();
+          // Update tickets UI.
+          UpdateTicketsUIAll();
+          // Update scoreboard.
+          UpdateScoreBoard();
+          // Update Capture Flags
+          UpdateAllFlags();
+          // Adjust AI Difficulty.
+          UpdateAIDifficulty();
+        }
+    }
+}
+// [Done]
+async function SpawnTickUpdate() 
+{
+    while (!gameEnded) 
+    {
+        await mod.Wait(1);
+        // Spawn AI players.
+        RespawnAIPlayers();
+        CheckTeamMemebers();
+    }
+}
+//#endregion
+
+//#region Kills, Damages, Deaths, Assists, Revives. Code 30
+// [DONE] Called when a player gets a kill
+export async function OnPlayerEarnedKill(player: mod.Player, victim: mod.Player, deathType: mod.PlayerDeathTypes, weapon: mod.Weapons)
+{
+  await mod.Wait(0.2);
+  return;
+  let pl = FindPlayer(player);
+  let vc = FindPlayer(victim);  
+  if(!mod.Equals(pl.player, vc.player))
+  {
+    pl.kills++;
+    pl.score += 100;
+    vc.deaths++;
+    if(mod.Equals(pl.team, TEAM_HQ1))
+    {
+      // Player is part of Team 1.
+      team_hq2_tickets--;
+    }
+    else
+    {
+      // Player is part of Team 2.
+      team_hq1_tickets--;
+    }    
+  }
+  else
+  {
+    // Player has killed himself.
+    vc.deaths++;
+  }
+  LogFunctionDebug('OnPlayerEarnedKill', 30010);
+}
+// This will trigger when a Player takes damage.
+export async function OnPlayerDamaged(eventPlayer: mod.Player, badguy: mod.Player, damageType: mod.DamageType, weaponUnlock: mod.WeaponUnlock)
+{
+  await mod.Wait(0.2);
+  return;
+  const player = FindPlayer(eventPlayer);
+  const otherGuy = FindPlayer(badguy);
+  otherGuy.score += 1;
+  if (player.isAISoldier)
+  {
+    DamagedBehavior(player, badguy, damageType, weaponUnlock);
+  }
+}
+// This will trigger whenever a Player dies.
+export async function OnPlayerDied(eventPlayer: mod.Player,otherPlayer: mod.Player,deathType: mod.DeathType,weaponUnlock: mod.WeaponUnlock)
+{
+  await mod.Wait(0.3);
+  LogFunctionDebug('OnPlayerDied', 30020);
+}
+// Called when a player gets a kill that he assisted with.
+export async function OnPlayerEarnedKillAssist(eventPlayer: mod.Player, victim: mod.Player)
+{
+  await mod.Wait(0.2);  
+  return;
+  let player = FindPlayer(eventPlayer);
+  player.assists++;
+  player.score += 50;
+  LogFunctionDebug('OnPlayerEarnedKillAssist', 30030);
+}
+// This will trigger when a Player is revived by another Player.
+export async function OnRevived(eventPlayer: mod.Player, eventOtherPlayer: mod.Player)
+{
+  await mod.Wait(0.2);
+  return;
+  let pl = FindPlayer(eventOtherPlayer);
+  pl.score += 100;
+  LogFunctionDebug('OnRevived', 30040);
+}
+//#endregion
+
+//#region Flags Code 10
+function CaptureFlagUpdate()
+{  
+  const numberOfPlayers = Players.playersList.length;  
+  for (let i = 0; i < numberOfPlayers; i++) 
+  {
+    const player = Players.playersList[i];
+    if(player.isInsideCapturePoint)
+    {
+      UpdateCapturePointStatusUIPlayer(player);
+    }
+  }
+}
+// [DONE] This will trigger when a Player enters a CapturePoint capturing area.
+export async function OnPlayerEnterCapturePoint(eventPlayer: mod.Player, capturePoint: mod.CapturePoint)
+{  
+  // Show Team UI capture point is being captured
+  await mod.Wait(0.2);
+  // Get team owner of this flag.
+  let flagOwner = mod.GetCurrentOwnerTeam(capturePoint);
+  // Need to figure out if I am the one who entered the capture point so I can update my UI.
+  const player = FindPlayer(eventPlayer);
+  // This is used for humans to show the UI.
+  player.isInsideCapturePoint = true;
+  if(player.aiState == AI_State.RunningToFlag)
+  {
+    // Is this the intented flag to capture?
+    if(mod.Equals(capturePoint, player.nextCapturePoint))
+    {
+      // If we do not own the flag already.
+      if(!mod.Equals(player.team, flagOwner))
+      {
+        LogFunctionDebug('OnPlayerEnterCapturePoint',10201);
+        // Start defending the flag until it is captured.
+        player.isInsideCapturePoint = true;
+        // Update the current capture flag.
+        player.currentCapturePoint = capturePoint;
+        // Update the position of the capture point.
+        player.currentCapturePointPosition = player.nextCapturePointPosition;
+        // Update AI state. 
+        SetAIState(player, AI_State.Capturing);
+        SetAIState(player, AI_State.Idle);
+      }
+      else
+      {
+        LogFunctionDebug('OnPlayerEnterCapturePoint',10202);
+        // We already own this flag so we need to select a new waypoint.
+        SetAIState(player, AI_State.Idle);
+      }
+    }
+  }
+  else
+  {
+    LogFunctionDebug('OnPlayerEnterCapturePoint',10203);
+  }
+}
+function PlayVoices(capturePoint:mod.CapturePoint, player:PlayerClass)
+{
+  // Play voices.
+  for (let i = 0; i < Players.playersList.length; i++) 
+  {    
+    let plr = Players.playersList[i];
+    // Actual player.
+    if(mod.Equals(plr.team, mod.GetCurrentOwnerTeam(capturePoint)) && mod.GetTeam(player.player) != plr.team)
+    {
+      // Play Voice Someone is trying to capture our flag.
+      mod.PlayVO(mod.GetVO(0), mod.VoiceOverEvents2D.ObjectiveCapturedEnemyGeneric, mod.VoiceOverFlags.Alpha, plr.player);
+    }
+    else
+    {
+      // Play voice we are capturing the flag.
+      mod.PlayVO(mod.GetVO(0), mod.VoiceOverEvents2D.ObjectiveCapturedGeneric, mod.VoiceOverFlags.Alpha, plr.player);
+    }
+  }  
+
+}
+// This will trigger when a Player exits a CapturePoint capturing area.
+export async function OnPlayerExitCapturePoint(player: mod.Player, capturePoint: mod.CapturePoint)
+{
+  await mod.Wait(0.2);
+  const playerc = FindPlayer(player);
+  playerc.isInsideCapturePoint = false;
+  HideCaptureStatusUIPlayer(playerc);
+  LogFunctionDebug('OnPlayerExitCapturePoint', 10300);
+}
+// This will trigger when a team begins capturing a CapturePoint.
+export async function OnCapturePointCapturing(capturePoint: mod.CapturePoint)
+{
+  await mod.Wait(0.2);
+  //Timer Flip Flop to fix issue with broken timer settings
+  mod.SetCapturePointNeutralizationTime(capturePoint, CAPTURE_POINT_DURATION);
+  LogFunctionDebug('OnCapturePointCapturing', 10400);
+}
+// [DONE] This will trigger when a team takes control of a CapturePoint.
+export async function OnCapturePointCaptured(capturePoint: mod.CapturePoint)
+{  
+  await mod.Wait(0.2);
+  //Timer Flip Flop to fix issue with broken timer settings
+  mod.SetCapturePointNeutralizationTime(capturePoint, CAPTURE_POINT_DURATION);
+  let newOwner = mod.GetCurrentOwnerTeam(capturePoint);
+  let flagId = mod.GetObjId(capturePoint);  
+  // Update owner.
+  CaptureFlags.changeOwner(flagId, newOwner);
+  // Get players inside the capture point.
+  let players = mod.GetPlayersOnPoint(capturePoint);
+  // Get number of 
+  let playersCount = SizeOf(players);
+  // We have captured an objective.  
+  for (let i = 0; i < playersCount; i++) 
+  {    
+    const player = FindPlayer(ElementAt(players, i) as mod.Player);
+    if(mod.Equals(player.team, newOwner))
+    {
+      // Add score.
+      // Give player 200 points.
+      player.score += 200;
+      player.flags++;
+      // Play We have captured an objective voice.
+      mod.PlayVO(mod.GetVO(0), mod.VoiceOverEvents2D.ObjectiveCapturedGeneric, mod.VoiceOverFlags.Alpha, player.player);
+      LogFunctionDebug('OnCapturePointCaptured', 10501);
+      SetAIState(player, AI_State.Idle);
+    }
+  }
+  // We have lost an objective.
+  const numberOfPlayers = Players.playersList.length;  
+  for (let i = 0; i < numberOfPlayers; i++) 
+  {
+    const loopPlayer = Players.playersList[i];
+    if(!mod.Equals(loopPlayer.team, newOwner))
+    {
+      // Play We have lost an objective voice.
+      mod.PlayVO(mod.GetVO(0), mod.VoiceOverEvents2D.ObjectiveCapturedEnemy, mod.VoiceOverFlags.Alpha, loopPlayer.player);
+    }
+  }
+}
+// This will trigger when a team loses control of a CapturePoint.
+export async function OnCapturePointLost(capturePoint: mod.CapturePoint)
+{
+  await mod.Wait(0.2);
+  // Show Team UI capture point has been lost.
+  let other_Team = mod.GetCurrentOwnerTeam(capturePoint);
+  // We have lost an objective.
+  const numberOfPlayers = Players.playersList.length;  
+  for (let i = 0; i < numberOfPlayers; i++) 
+  {
+    const loopPlayer = Players.playersList[i];
+    if(!mod.Equals(loopPlayer.team, other_Team))
+    {      
+      // Play We have lost an objective voice.
+      mod.PlayVO(mod.GetVO(0), mod.VoiceOverEvents2D.ObjectiveCapturedEnemy, mod.VoiceOverFlags.Alpha, loopPlayer.player);
+    }
+  }
+  LogFunctionDebug('OnCapturePointLost', 10600);
+}
+//#endregion
+
+//#region Deploy Code 20
+// Online players.
+export async function OnPlayerJoinGame (player: mod.Player)
+{
+  //AddPlayer(player);
+  // Assign ticket value.
+  //let joinedPlayer = FindPlayer(player);
+  //mod.EnablePlayerDeploy(player, true);
+  LogFunctionDebug('OnPlayerJoinGame', 20000);
+}
+// This will trigger when any player leaves the game.
+export async function OnPlayerLeaveGame(playerId: number)
+{
+  await mod.Wait(0.1);
+  // Flag Player has left the game.
+  //FlagPlayerHasLeftTheGame(playerId);
+  if(playerId <= BOT_COUNT_PER_TEAM)
+  {
+    // Team 1.
+    let name1 = mod.Message(playerId);
+    mod.SpawnAIFromAISpawner(GetAISpawner(TEAM_HQ1), name1, TEAM_HQ1);
+  }
+  else
+  {
+    // Team 2.
+    let name2 = mod.Message(playerId);
+    mod.SpawnAIFromAISpawner(GetAISpawner(TEAM_HQ2), name2, TEAM_HQ2);
+  }
+  // Need to respawn an AI.
+  //SpawnAIPlayer(playerId);
+  LogFunctionDebug('OnPlayerLeaveGame', 20100);
+
+}
+export async function OnPlayerSwitchTeam(eventPlayer: mod.Player, eventTeam: mod.Team)
+{
+  LogFunctionDebug('OnPlayerSwitchTeam', 20200);
+}
+export async function OnPlayerDeployed(eventPlayer: mod.Player)
+{
+  await mod.Wait(0.5);
+  if(mod.IsPlayerValid(eventPlayer))
+  {
+    AddPlayer(eventPlayer);
+    const player = FindPlayer(eventPlayer);
+    
+    if(mod.GetSoldierState(player.player, mod.SoldierStateBool.IsAISoldier))
+    {
+      player.isAISoldier = true;
+    }  
+    SetAIState(player, AI_State.Idle);
+    // Apply difficulty adjustment.
+    if(player.isAISoldier)
+    {
+      if(adjust_hq1_difficulty_once)
+      {
+        if(mod.Equals(player.team, TEAM_HQ1))
+        {
+          mod.SetPlayerMaxHealth(player.player,250);
+        }
+      }
+      if(adjust_hq2_difficulty_once)
+      {
+        if(mod.Equals(player.team, TEAM_HQ2))
+        {
+          mod.SetPlayerMaxHealth(player.player,250);
+        }
+      }
+    }  
+    LogFunctionDebug('OnPlayerDeployed', 20301);
+  }
+  else
+  {
+    mod.ForceManDown(eventPlayer);
+    LogFunctionDebug('OnPlayerDeployed', 20302);
+  }  
+}
+// This will trigger when the Player dies and returns to the deploy screen.
+export async function OnPlayerUndeploy(player: mod.Player)
+{
+  await mod.Wait(0.25);
+  LogFunctionDebug('OnPlayerUndeploy', 20400);
+}
+// [Done]
+function AddPlayer(player: mod.Player)
+{
+  const numberOfPlayers = Players.playersList.length;
+  if(numberOfPlayers > MAX_PLAYER_COUNT)
+  {  
+    // To prevent memory leak.
+    //LogFunctionDebugAllPlayers('AddPlayer', 20801);
+    return;
+  }
+  
+  let isFound = false;
+  for (let i = 0; i < numberOfPlayers; i++) 
+  {
+    const loopPlayer = Players.playersList[i];
+    if(mod.Equals(player, loopPlayer.player))
+    {
+      isFound = true;
+    }    
+  }
+  if(!isFound)
+  {
+    let pl:PlayerClass
+    pl = new PlayerClass(player);
+    Players.playersList.push(pl);
+  }
+  LogFunctionDebug('AddPlayer', 20500);
+}
+// [Done]
+function FlagPlayerHasLeftTheGame(playerId:number)
+{
+  MessageDebugAllPlayers(9, playerId);
+  let playerIndex = FindPlayerIndexById(playerId);
+  if(playerIndex == -1)
+  {
+    return;
+  }
+  let player = Players.playersList[playerIndex];
+  player.hasLeftTheGame = true;
+  SetAIState(player, AI_State.Idle);
+  if(mod.Equals(player.team, TEAM_HQ1))
+  {
+    team_hq1_size--;    
+  }
+  else
+  {
+    team_hq2_size--;        
+  }
+}
+//#endregion
+
+//#region Vehicles Code 40
+// This will trigger when a Player enters a Vehicle seat.
+export async function OnPlayerEnterVehicle(eventPlayer: mod.Player, eventVehicle: mod.Vehicle)
+{
+  let player = FindPlayer(eventPlayer);
+  player.isInsideVehicle = true;
+
+}
+// This will trigger when a Player enters a Vehicle seat.
+export async function OnPlayerEnterVehicleSeat(eventPlayer: mod.Player, eventVehicle: mod.Vehicle, eventSeat: mod.Object)
+{
+  let player = FindPlayer(eventPlayer);
+  player.isInsideVehicle = true;
+
+}
+// This will trigger when a Player exits a Vehicle.
+export async function OnPlayerExitVehicle(eventPlayer: mod.Player, eventVehicle: mod.Vehicle)
+{
+  let player = FindPlayer(eventPlayer);
+  player.isInsideVehicle = false;
 }
 //#endregion
 
@@ -1670,29 +1703,31 @@ function UpdateCapturePointStatusUIPlayer(player:PlayerClass)
   // Only for human players.
   if(!player.isAISoldier)
   {
-    let blueCount = GetTeamFlagCount(TEAM_HQ1, player.currentCapturePoint)
-    let redCount = GetTeamFlagCount(TEAM_HQ2, player.currentCapturePoint)      
-    let messageBlue = mod.Message(mod.stringkeys.capturestatusblue, blueCount);
-    let messageRed = mod.Message(mod.stringkeys.capturestatusred, redCount);
+    let progress = mod.GetCaptureProgress(player.currentCapturePoint);
+    let team = mod.GetOwnerProgressTeam(player.currentCapturePoint);
+    MessageDebugAllPlayers(1,progress);
+    let blueCount = GetTeamFlagCount(TEAM_HQ1, player.currentCapturePoint);
+    let redCount = GetTeamFlagCount(TEAM_HQ2, player.currentCapturePoint);   
     if(mod.Equals(player.team, TEAM_HQ1))
     {
-      messageBlue = mod.Message(mod.stringkeys.capturestatusblue, blueCount);
-      messageRed = mod.Message(mod.stringkeys.capturestatusred, redCount);
+      blueCount = GetTeamFlagCount(TEAM_HQ1, player.currentCapturePoint);
+      redCount = GetTeamFlagCount(TEAM_HQ2, player.currentCapturePoint);    
     }
     else
     {
-      messageBlue = mod.Message(mod.stringkeys.capturestatusblue, redCount);
-      messageRed = mod.Message(mod.stringkeys.capturestatusred, blueCount);
+      blueCount = GetTeamFlagCount(TEAM_HQ2, player.currentCapturePoint);
+      redCount = GetTeamFlagCount(TEAM_HQ1, player.currentCapturePoint); 
     }
+    let captureLabel = mod.Message(mod.stringkeys.A);
     // Update UI.
     if (player.roundStatusUI.isOpenCapturePointStatus())
     {
       // Add 2 progress bar. one for the count blue vs red and one for the capture progress.
-      player.roundStatusUI.refreshCapturePointStatus(messageBlue, messageRed);
+      player.roundStatusUI.refreshCapturePointStatus(captureLabel, progress, blueCount, redCount);
     }
     else
     {
-      player.roundStatusUI.openCapturePointStatus(messageBlue, messageRed);
+      player.roundStatusUI.openCapturePointStatus(captureLabel, progress, blueCount, redCount);
     }
   }
 }
@@ -1854,6 +1889,45 @@ function UpdatePlayerPositionDebug()
   {
     return;
   }  
+  //MessageDebugAllPlayers(0, team_hq1_size, team_hq2_size, MAX_PLAYER_COUNT);
+
+  let players =  mod.AllPlayers();
+  let nofPlayers = SizeOf(players);
+  let team1Count = 0;
+  let team2Count = 0;
+  for(let i = 0; i < nofPlayers; i++)
+  {
+    let p = ElementAt(players, i) as mod.Player;
+    if(mod.Equals(mod.GetTeam(p), TEAM_HQ1))
+    {
+      team1Count++;
+    }
+    else
+    {
+      team2Count++;
+    }
+  }
+  MessageDebugAllPlayers(3, 0);
+  MessageDebugAllPlayers(4, nofPlayers, team1Count, team2Count);
+  MessageDebugAllPlayers(5, 0);
+
+  nofPlayers = Players.playersList.length;
+  team1Count = 0;
+  team2Count = 0;
+  for(let i = 0; i < nofPlayers; i++)
+  {
+    let p = Players.playersList[i].player;
+    if(mod.Equals(mod.GetTeam(p), TEAM_HQ1))
+    {
+      team1Count++;
+    }
+    else
+    {
+      team2Count++;
+    }
+  }
+  MessageDebugAllPlayers(6, nofPlayers, team1Count, team2Count);
+  MessageDebugAllPlayers(7, 0, 0, 0);
 }
 function DisplayTeamNotification(player:mod.Player, message: string)
 {
@@ -2131,7 +2205,7 @@ class RoundStatusUI
 {
     #jsPlayer;
     #rootRoundStatusWidget: mod.UIWidget|undefined;
-    #rootCapturePointStatusWidget: mod.UIWidget|undefined;
+    
 
     // We want the status UI like this
     //    83     83      83    250
@@ -2181,6 +2255,10 @@ class RoundStatusUI
     #redTicketRowIndex = 2;
     #redTicketColIndex = 2;
 
+    // Flags.
+    #capturePoints : mod.UIWidget[];
+    #capturePointsLabels : mod.UIWidget[];
+    // Timer.
     #timer: mod.UIWidget|undefined;
     #blueTickets: mod.UIWidget|undefined;
     #redTickets: mod.UIWidget|undefined;
@@ -2188,19 +2266,31 @@ class RoundStatusUI
     #blueTicketsProgressBarBackground: mod.UIWidget|undefined;
     #redTicketsProgressBar: mod.UIWidget|undefined;
     #redTicketsProgressBarBackground: mod.UIWidget|undefined;
+    
 
+    
+    
+
+    #isRoundStatusUIVisible = false;
+
+    // We want the capture status UI like this
+    //    83     83      83    250
+    // -----------------------
+    // |        flag         | 30
+    // |     capture bar     | 30
+    // | Blue   vsBar   Red  | 30
+    // -----------------------
+    //                         90
+    #rootCapturePointStatusWidget: mod.UIWidget|undefined;
+    #flagCaptureLabel: mod.UIWidget|undefined;
+    #flagCaptureProgressBar: mod.UIWidget|undefined;
     #captureStatusBlue: mod.UIWidget|undefined;
     #blueCountProgressBar: mod.UIWidget|undefined;
     #captureStatusRed: mod.UIWidget|undefined;
     #redCountProgressBar: mod.UIWidget|undefined;
-    #flagCaptureProgressBar: mod.UIWidget|undefined;
-
-    #isRoundStatusUIVisible = false;
     #isCapturePointStatusUIVisible = false;
 
-    // Flags
-    #capturePoints : mod.UIWidget[];
-    #capturePointsLabels : mod.UIWidget[];
+    
 
     constructor(jsPlayer: PlayerClass)
     {
@@ -2270,17 +2360,17 @@ class RoundStatusUI
         mod.SetUIWidgetVisible(this.#rootRoundStatusWidget, true);
         this.#isRoundStatusUIVisible = true;
     }
-    openCapturePointStatus(messageBlue: mod.Message, messageRed: mod.Message)
+    openCapturePointStatus(capturePointLabel: mod.Message, progress:number, blueCount: number, redCount: number)
     {
         console.log("Open message UI");
         if (!this.#rootCapturePointStatusWidget)
         {
             this.#createCapturePointStatusContainer();
-            this.#createCaptureStatus(messageBlue, messageRed);
+            this.#createCaptureStatus(capturePointLabel);
         }
         else
         {            
-            this.refreshCapturePointStatus(messageBlue, messageRed);
+            this.refreshCapturePointStatus(capturePointLabel, progress, blueCount, redCount);
             if (this.#captureStatusBlue)
                 mod.SetUITextColor(this.#captureStatusBlue, mod.CreateVector(BLUETEAMCOLOR[0], BLUETEAMCOLOR[1], BLUETEAMCOLOR[2]));
             if (this.#captureStatusRed)
@@ -2390,21 +2480,53 @@ class RoundStatusUI
         }
       }      
     }
-    refreshCapturePointStatus(messageBlue: mod.Message, messageRed: mod.Message)
+    refreshCapturePointStatus(capturePointLabel: mod.Message, progress:number, blueCount: number, redCount: number)
     {
         console.log("refresh message text with ", );
+        
+        // Flag Label.
+        if (!this.#flagCaptureLabel)
+        {
+            console.log("Missing Message Text!");
+            return;
+        } 
+        mod.SetUITextLabel(this.#flagCaptureLabel, capturePointLabel);
+        
+        // Capture progress.
+        if (this.#flagCaptureProgressBar)
+        {
+          // Update progress bar.
+          mod.SetUIWidgetSize(this.#flagCaptureProgressBar, mod.CreateVector(progress * this.#progressBarWidth, this.#progressBarHeight, 1));
+        }
+        
         if (!this.#captureStatusBlue)
         {
             console.log("Missing Message Text!");
             return;
         }
+        let messageBlue = mod.Message(mod.stringkeys.capturestatusblue, blueCount);        
         mod.SetUITextLabel(this.#captureStatusBlue, messageBlue);
+        if (this.#blueCountProgressBar)
+        {
+          // Update progress bar.
+          let widthBlue = blueCount / (blueCount + redCount);
+          mod.SetUIWidgetSize(this.#blueCountProgressBar, mod.CreateVector(widthBlue * this.#progressBarWidth, this.#progressBarHeight, 1));
+        }
+        
+        
         if (!this.#captureStatusRed)
         {
             console.log("Missing Message Text!");
             return;
         }
+        let messageRed = mod.Message(mod.stringkeys.capturestatusred, redCount);
         mod.SetUITextLabel(this.#captureStatusRed, messageRed);
+        if (this.#redCountProgressBar)
+        {
+          // Update progress bar.
+          let widthBlue = redCount / (blueCount + redCount);
+          mod.SetUIWidgetSize(this.#redCountProgressBar, mod.CreateVector(widthBlue * this.#progressBarWidth, this.#progressBarHeight, 1));
+        }
     }
     //#endregion
 
@@ -2439,7 +2561,7 @@ class RoundStatusUI
         this.#rootCapturePointStatusWidget = ParseUI({
             type: "Container",
             size: [this.#containerWidth, this.#containerHeight],
-            position: [0, 25],
+            position: [0, 45],
             anchor: mod.UIAnchor.TopCenter,
             bgFill: mod.UIBgFill.Blur,
             bgColor: this.#activeTabBgColor,
@@ -2597,35 +2719,82 @@ class RoundStatusUI
         this.#capturePointsLabels.push(flagContainer1);
       }
     }
-    #createCaptureStatus(messageBlue: mod.Message, messageRed: mod.Message)
+    #createCaptureStatus(message: mod.Message)
     {
+        // Capture Label
+        this.#flagCaptureLabel = ParseUI({
+            type: "Text",
+            parent: this.#rootCapturePointStatusWidget,
+            textSize: 28,
+            position: [0, 0, 0],
+            size: [this.#containerWidth, 30],
+            anchor: mod.UIAnchor.TopLeft,
+            textAnchor: mod.UIAnchor.Center,
+            bgAlpha: 0,
+            textColor: BLUETEAMCOLOR,
+            //bgColor: [1, 0, 0],
+            textLabel: message,
+        });
+        // Capture Progress bar
+        this.#flagCaptureProgressBar = ParseUI({
+            type: "Container",
+            parent: this.#rootCapturePointStatusWidget,
+            size: [this.#containerWidth, this.#containerHeight],
+            position: [0, 30],
+            anchor: mod.UIAnchor.TopLeft,
+            bgFill: mod.UIBgFill.Solid,
+            bgColor: BLUETEAMCOLOR,
+            bgAlpha: FILLCOLORSALPHA,
+        });
         // Capture Status
         this.#captureStatusBlue = ParseUI({
             type: "Text",
             parent: this.#rootCapturePointStatusWidget,
-            textSize: 22,
-            position: [0, 10, 0],
+            textSize: 28,
+            position: [0, 60, 0],
             size: [this.#colWidth, this.#rowHeight],
-            anchor: mod.UIAnchor.CenterLeft,
+            anchor: mod.UIAnchor.TopLeft,
             textAnchor: mod.UIAnchor.CenterLeft,
             bgAlpha: 0,
             textColor: BLUETEAMCOLOR,
             //bgColor: [1, 0, 0],
-            textLabel: messageBlue,
+            textLabel: message,
+        });
+        // Capture Progress bar
+        this.#blueCountProgressBar = ParseUI({
+            type: "Container",
+            parent: this.#rootCapturePointStatusWidget,
+            size: [97.5, 10],
+            position: [30, 60],
+            anchor: mod.UIAnchor.TopLeft,
+            bgFill: mod.UIBgFill.Solid,
+            bgColor: BLUETEAMCOLOR,
+            bgAlpha: FILLCOLORSALPHA,
+        });
+        // Capture Progress bar
+        this.#redCountProgressBar = ParseUI({
+            type: "Container",
+            parent: this.#rootCapturePointStatusWidget,
+            size: [97.5, 10],
+            position: [30, 60],
+            anchor: mod.UIAnchor.TopRight,
+            bgFill: mod.UIBgFill.Solid,
+            bgColor: REDTEAMCOLOR,
+            bgAlpha: FILLCOLORSALPHA,
         });
         // Capture Status
         this.#captureStatusRed = ParseUI({
             type: "Text",
             parent: this.#rootCapturePointStatusWidget,
-            textSize: 22,
-            position: [0, 10, 0],
+            textSize: 28,
+            position: [0, 60, 0],
             size: [this.#colWidth, this.#rowHeight],
-            anchor: mod.UIAnchor.CenterRight,
+            anchor: mod.UIAnchor.TopRight,
             textAnchor: mod.UIAnchor.CenterRight,
             bgAlpha: 0,
             textColor: REDTEAMCOLOR,
             //bgColor: [1, 0, 0],
-            textLabel: messageRed,
+            textLabel: message,
         });
     }
     //#endregion
