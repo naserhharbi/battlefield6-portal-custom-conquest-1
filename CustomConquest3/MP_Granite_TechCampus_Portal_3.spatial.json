@@ -1,0 +1,2837 @@
+{
+    "Portal_Dynamic": [
+        {
+            "name": "TEAM_1_HQ",
+            "AltTeam": "TeamNeutral",
+            "ObjId": 1,
+            "InfantrySpawns": [
+                "TEAM_1_HQ/SpawnPoint_1_1",
+                "TEAM_1_HQ/SpawnPoint_1_2",
+                "TEAM_1_HQ/SpawnPoint_1_3",
+                "TEAM_1_HQ/SpawnPoint_1_4"
+            ],
+            "HQArea": "TEAM_1_HQ/HQ_Team1",
+            "type": "HQ_PlayerSpawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -321.261,
+                "y": 144.308,
+                "z": 403.96
+            },
+            "id": "TEAM_1_HQ",
+            "linked": [
+                "HQArea",
+                "InfantrySpawns"
+            ]
+        },
+        {
+            "name": "HQ_Team1",
+            "type": "PolygonVolume",
+            "id": "TEAM_1_HQ/HQ_Team1",
+            "height": 0,
+            "points": [
+                {
+                    "x": -316.261,
+                    "y": 149.308,
+                    "z": 408.96
+                },
+                {
+                    "x": -316.261,
+                    "y": 149.308,
+                    "z": 398.96
+                },
+                {
+                    "x": -326.261,
+                    "y": 149.308,
+                    "z": 398.96
+                },
+                {
+                    "x": -326.261,
+                    "y": 149.308,
+                    "z": 408.96
+                }
+            ]
+        },
+        {
+            "name": "SpawnPoint_1_1",
+            "type": "SpawnPoint",
+            "right": {
+                "x": 0.999884,
+                "y": 0,
+                "z": 0.0152535
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": -0.0152535,
+                "y": 0,
+                "z": 0.999884
+            },
+            "position": {
+                "x": -321.261,
+                "y": 145.124376,
+                "z": 400.96
+            },
+            "id": "TEAM_1_HQ/SpawnPoint_1_1"
+        },
+        {
+            "name": "SpawnPoint_1_2",
+            "type": "SpawnPoint",
+            "right": {
+                "x": -0.9995,
+                "y": 0,
+                "z": 0.0316198
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": -0.0316198,
+                "y": 0,
+                "z": -0.9995
+            },
+            "position": {
+                "x": -318.261,
+                "y": 145.124376,
+                "z": 403.96
+            },
+            "id": "TEAM_1_HQ/SpawnPoint_1_2"
+        },
+        {
+            "name": "SpawnPoint_1_3",
+            "type": "SpawnPoint",
+            "right": {
+                "x": -0.0428871,
+                "y": 0,
+                "z": -0.99908
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0.99908,
+                "y": 0,
+                "z": -0.0428871
+            },
+            "position": {
+                "x": -324.261,
+                "y": 145.124376,
+                "z": 403.96
+            },
+            "id": "TEAM_1_HQ/SpawnPoint_1_3"
+        },
+        {
+            "name": "SpawnPoint_1_4",
+            "type": "SpawnPoint",
+            "right": {
+                "x": 0.0841819,
+                "y": 0,
+                "z": 0.99645
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": -0.99645,
+                "y": 0,
+                "z": 0.0841819
+            },
+            "position": {
+                "x": -321.261,
+                "y": 145.124376,
+                "z": 406.96
+            },
+            "id": "TEAM_1_HQ/SpawnPoint_1_4"
+        },
+        {
+            "name": "AI_Spawner",
+            "ObjId": 9101,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -312.03221,
+                "y": 143.889879,
+                "z": 419.8008
+            },
+            "id": "TEAM_1_HQ/AI_Spawner"
+        },
+        {
+            "name": "AI_Spawner2",
+            "ObjId": 9102,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -342.5959,
+                "y": 145.200822,
+                "z": 414.8795
+            },
+            "id": "TEAM_1_HQ/AI_Spawner2"
+        },
+        {
+            "name": "AI_Spawner3",
+            "ObjId": 9103,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -330.43165,
+                "y": 145.200822,
+                "z": 401.051
+            },
+            "id": "TEAM_1_HQ/AI_Spawner3"
+        },
+        {
+            "name": "AI_Spawner4",
+            "ObjId": 9104,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -345.2375,
+                "y": 145.200822,
+                "z": 400.86363
+            },
+            "id": "TEAM_1_HQ/AI_Spawner4"
+        },
+        {
+            "name": "AI_Spawner5",
+            "ObjId": 9105,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -325.92302,
+                "y": 145.244157,
+                "z": 418.832
+            },
+            "id": "TEAM_1_HQ/AI_Spawner5"
+        },
+        {
+            "name": "AI_Spawner6",
+            "ObjId": 9106,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -337.0784,
+                "y": 145.200822,
+                "z": 407.96366
+            },
+            "id": "TEAM_1_HQ/AI_Spawner6"
+        },
+        {
+            "name": "TEAM_2_HQ",
+            "Team": "Team2",
+            "AltTeam": "TeamNeutral",
+            "ObjId": 2,
+            "InfantrySpawns": [
+                "TEAM_2_HQ/SpawnPoint_2_1",
+                "TEAM_2_HQ/SpawnPoint_2_2",
+                "TEAM_2_HQ/SpawnPoint_2_3",
+                "TEAM_2_HQ/SpawnPoint_2_4"
+            ],
+            "HQArea": "TEAM_2_HQ/HQ_Team2",
+            "type": "HQ_PlayerSpawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -219.565,
+                "y": 140.484,
+                "z": 140.04
+            },
+            "id": "TEAM_2_HQ",
+            "linked": [
+                "HQArea",
+                "InfantrySpawns"
+            ]
+        },
+        {
+            "name": "HQ_Team2",
+            "type": "PolygonVolume",
+            "id": "TEAM_2_HQ/HQ_Team2",
+            "height": 0,
+            "points": [
+                {
+                    "x": -214.565,
+                    "y": 145.484,
+                    "z": 145.04
+                },
+                {
+                    "x": -214.565,
+                    "y": 145.484,
+                    "z": 135.04
+                },
+                {
+                    "x": -224.565,
+                    "y": 145.484,
+                    "z": 135.04
+                },
+                {
+                    "x": -224.565,
+                    "y": 145.484,
+                    "z": 145.04
+                }
+            ]
+        },
+        {
+            "name": "SpawnPoint_2_1",
+            "type": "SpawnPoint",
+            "right": {
+                "x": 0.87795,
+                "y": 0,
+                "z": 0.478754
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": -0.478754,
+                "y": 0,
+                "z": 0.87795
+            },
+            "position": {
+                "x": -219.565,
+                "y": 140.484,
+                "z": 137.04
+            },
+            "id": "TEAM_2_HQ/SpawnPoint_2_1"
+        },
+        {
+            "name": "SpawnPoint_2_2",
+            "type": "SpawnPoint",
+            "right": {
+                "x": -0.997604,
+                "y": 0,
+                "z": -0.0691822
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0.0691822,
+                "y": 0,
+                "z": -0.997604
+            },
+            "position": {
+                "x": -216.565,
+                "y": 140.484,
+                "z": 140.04
+            },
+            "id": "TEAM_2_HQ/SpawnPoint_2_2"
+        },
+        {
+            "name": "SpawnPoint_2_3",
+            "type": "SpawnPoint",
+            "right": {
+                "x": 0.162758,
+                "y": 0,
+                "z": -0.986666
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0.986666,
+                "y": 0,
+                "z": 0.162758
+            },
+            "position": {
+                "x": -222.565,
+                "y": 139.933722,
+                "z": 140.04
+            },
+            "id": "TEAM_2_HQ/SpawnPoint_2_3"
+        },
+        {
+            "name": "SpawnPoint_2_4",
+            "type": "SpawnPoint",
+            "right": {
+                "x": -0.165771,
+                "y": 0,
+                "z": 0.986164
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": -0.986164,
+                "y": 0,
+                "z": -0.165771
+            },
+            "position": {
+                "x": -219.565,
+                "y": 139.709433,
+                "z": 143.04
+            },
+            "id": "TEAM_2_HQ/SpawnPoint_2_4"
+        },
+        {
+            "name": "AI_Spawner",
+            "ObjId": 9201,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -225.17907,
+                "y": 140.288565,
+                "z": 129.4042
+            },
+            "id": "TEAM_2_HQ/AI_Spawner"
+        },
+        {
+            "name": "AI_Spawner2",
+            "ObjId": 9202,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -241.0498,
+                "y": 138.77233,
+                "z": 127.8285
+            },
+            "id": "TEAM_2_HQ/AI_Spawner2"
+        },
+        {
+            "name": "AI_Spawner3",
+            "ObjId": 9203,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -213.57741,
+                "y": 140.5614384,
+                "z": 140.222755
+            },
+            "id": "TEAM_2_HQ/AI_Spawner3"
+        },
+        {
+            "name": "AI_Spawner4",
+            "ObjId": 9204,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -218.696393,
+                "y": 138.77772,
+                "z": 119.9065
+            },
+            "id": "TEAM_2_HQ/AI_Spawner4"
+        },
+        {
+            "name": "AI_Spawner5",
+            "ObjId": 9205,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -202.7495,
+                "y": 140.253882,
+                "z": 148.63274
+            },
+            "id": "TEAM_2_HQ/AI_Spawner5"
+        },
+        {
+            "name": "AI_Spawner6",
+            "ObjId": 9206,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -195.8621,
+                "y": 138.65278,
+                "z": 141.92818
+            },
+            "id": "TEAM_2_HQ/AI_Spawner6"
+        },
+        {
+            "name": "CombatArea",
+            "CombatVolume": "CombatArea/CombatVolume",
+            "type": "CombatArea",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -193.415,
+                "y": 136.643,
+                "z": 352.408
+            },
+            "id": "CombatArea",
+            "linked": [
+                "CombatVolume"
+            ]
+        },
+        {
+            "name": "CombatVolume",
+            "type": "PolygonVolume",
+            "id": "CombatArea/CombatVolume",
+            "height": 100,
+            "points": [
+                {
+                    "x": -356.5951,
+                    "y": 271.024,
+                    "z": 433.081
+                },
+                {
+                    "x": -281.7181,
+                    "y": 271.024,
+                    "z": 432.23
+                },
+                {
+                    "x": -135.49579,
+                    "y": 271.024,
+                    "z": 292.7484
+                },
+                {
+                    "x": -134.55625,
+                    "y": 271.024,
+                    "z": 164.298
+                },
+                {
+                    "x": -254.7571,
+                    "y": 271.024,
+                    "z": 44.097
+                },
+                {
+                    "x": -421.7041,
+                    "y": 271.024,
+                    "z": 204.3651
+                }
+            ]
+        },
+        {
+            "name": "DeployCam",
+            "type": "DeployCam",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 0.101056,
+                "z": -0.994881
+            },
+            "front": {
+                "x": 0,
+                "y": 0.994881,
+                "z": 0.101056
+            },
+            "position": {
+                "x": -218.643,
+                "y": 501.636,
+                "z": 311.623
+            },
+            "id": "Camera3D/DeployCam"
+        },
+        {
+            "name": "Sector",
+            "CapturePoints": [
+                "Sector/CapturePoint",
+                "Sector/CapturePoint2",
+                "Sector/CapturePoint3",
+                "Sector/CapturePoint4"
+            ],
+            "SectorArea": "CombatArea/CombatVolume",
+            "type": "Sector",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "id": "Sector",
+            "linked": [
+                "SectorArea",
+                "CapturePoints"
+            ]
+        },
+        {
+            "name": "CapturePoint",
+            "ObjId": 100,
+            "InfantrySpawnPoints_Team1": [
+                "Sector/CapturePoint/SpawnPoint",
+                "Sector/CapturePoint/SpawnPoint2"
+            ],
+            "InfantrySpawnPoints_Team2": [
+                "Sector/CapturePoint/SpawnPoint",
+                "Sector/CapturePoint/SpawnPoint2"
+            ],
+            "CaptureArea": "Sector/CapturePoint/PolygonVolume",
+            "type": "CapturePoint",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -318.281,
+                "y": 154.032,
+                "z": 239.657
+            },
+            "id": "Sector/CapturePoint",
+            "linked": [
+                "CaptureArea",
+                "InfantrySpawnPoints_Team1",
+                "InfantrySpawnPoints_Team2"
+            ]
+        },
+        {
+            "name": "PolygonVolume",
+            "type": "PolygonVolume",
+            "id": "Sector/CapturePoint/PolygonVolume",
+            "height": 10,
+            "points": [
+                {
+                    "x": -321.31399,
+                    "y": 154.032,
+                    "z": 195.5717
+                },
+                {
+                    "x": -347.4847,
+                    "y": 154.032,
+                    "z": 260.5138
+                },
+                {
+                    "x": -302.8976,
+                    "y": 154.032,
+                    "z": 260.6753
+                },
+                {
+                    "x": -289.166,
+                    "y": 154.032,
+                    "z": 227.7197
+                }
+            ]
+        },
+        {
+            "name": "AI_Spawner0",
+            "ObjId": 180,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -326.9204,
+                "y": 145.20061,
+                "z": 202.0228
+            },
+            "id": "Sector/CapturePoint/AI_Spawner0"
+        },
+        {
+            "name": "AI_Spawner1",
+            "ObjId": 181,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -240.2326,
+                "y": 138.5657,
+                "z": 274.283
+            },
+            "id": "Sector/CapturePoint/AI_Spawner1"
+        },
+        {
+            "name": "AI_Spawner2",
+            "ObjId": 182,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -411.443,
+                "y": 142.6163,
+                "z": 231.80782
+            },
+            "id": "Sector/CapturePoint/AI_Spawner2"
+        },
+        {
+            "name": "AI_Spawner3",
+            "ObjId": 183,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -415.1398,
+                "y": 141.1909,
+                "z": 205.6739
+            },
+            "id": "Sector/CapturePoint/AI_Spawner3"
+        },
+        {
+            "name": "AI_Spawner4",
+            "ObjId": 184,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -253.1722,
+                "y": 138.433,
+                "z": 297.024
+            },
+            "id": "Sector/CapturePoint/AI_Spawner4"
+        },
+        {
+            "name": "AI_Spawner5",
+            "ObjId": 185,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -229.4049,
+                "y": 138.5021,
+                "z": 255.7844
+            },
+            "id": "Sector/CapturePoint/AI_Spawner5"
+        },
+        {
+            "name": "AI_Spawner6",
+            "ObjId": 186,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -401.339,
+                "y": 139.3143,
+                "z": 188.8938
+            },
+            "id": "Sector/CapturePoint/AI_Spawner6"
+        },
+        {
+            "name": "AI_Spawner7",
+            "ObjId": 187,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -373.6654,
+                "y": 141.5057,
+                "z": 217.5355
+            },
+            "id": "Sector/CapturePoint/AI_Spawner7"
+        },
+        {
+            "name": "AI_Spawner8",
+            "ObjId": 188,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -368.5608,
+                "y": 141.4861,
+                "z": 207.2692
+            },
+            "id": "Sector/CapturePoint/AI_Spawner8"
+        },
+        {
+            "name": "AI_Spawner9",
+            "ObjId": 189,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -271.4011,
+                "y": 138.5351,
+                "z": 278.5193
+            },
+            "id": "Sector/CapturePoint/AI_Spawner9"
+        },
+        {
+            "name": "AI_Spawner10",
+            "ObjId": 190,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -252.6333,
+                "y": 138.6055,
+                "z": 244.84485
+            },
+            "id": "Sector/CapturePoint/AI_Spawner10"
+        },
+        {
+            "name": "AI_Spawner11",
+            "ObjId": 191,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -287.7768,
+                "y": 143.4567,
+                "z": 260.8609
+            },
+            "id": "Sector/CapturePoint/AI_Spawner11"
+        },
+        {
+            "name": "AI_Spawner12",
+            "ObjId": 192,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -278.4089,
+                "y": 143.4544,
+                "z": 240.360674
+            },
+            "id": "Sector/CapturePoint/AI_Spawner12"
+        },
+        {
+            "name": "AI_Spawner13",
+            "ObjId": 193,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -340.962,
+                "y": 145.20061,
+                "z": 195.2469
+            },
+            "id": "Sector/CapturePoint/AI_Spawner13"
+        },
+        {
+            "name": "AI_Spawner14",
+            "ObjId": 194,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -347.308,
+                "y": 145.20061,
+                "z": 251.4153
+            },
+            "id": "Sector/CapturePoint/AI_Spawner14"
+        },
+        {
+            "name": "AI_Spawner15",
+            "ObjId": 195,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -360.4532,
+                "y": 145.20061,
+                "z": 248.67108
+            },
+            "id": "Sector/CapturePoint/AI_Spawner15"
+        },
+        {
+            "name": "SpawnPoint",
+            "type": "SpawnPoint",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -360.5858,
+                "y": 141.3931,
+                "z": 217.1931
+            },
+            "id": "Sector/CapturePoint/SpawnPoint"
+        },
+        {
+            "name": "SpawnPoint2",
+            "type": "SpawnPoint",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -247.6887,
+                "y": 138.6498,
+                "z": 273.8813
+            },
+            "id": "Sector/CapturePoint/SpawnPoint2"
+        },
+        {
+            "name": "CapturePoint2",
+            "ObjId": 200,
+            "InfantrySpawnPoints_Team1": [
+                "Sector/CapturePoint2/SpawnPoint",
+                "Sector/CapturePoint2/SpawnPoint2"
+            ],
+            "InfantrySpawnPoints_Team2": [
+                "Sector/CapturePoint2/SpawnPoint",
+                "Sector/CapturePoint2/SpawnPoint2"
+            ],
+            "CaptureArea": "Sector/CapturePoint2/PolygonVolume",
+            "type": "CapturePoint",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -318.281,
+                "y": 145.882,
+                "z": 239.657
+            },
+            "id": "Sector/CapturePoint2",
+            "linked": [
+                "CaptureArea",
+                "InfantrySpawnPoints_Team1",
+                "InfantrySpawnPoints_Team2"
+            ]
+        },
+        {
+            "name": "PolygonVolume",
+            "type": "PolygonVolume",
+            "id": "Sector/CapturePoint2/PolygonVolume",
+            "height": 3,
+            "points": [
+                {
+                    "x": -321.31399,
+                    "y": 145.882,
+                    "z": 195.5717
+                },
+                {
+                    "x": -347.4847,
+                    "y": 145.882,
+                    "z": 260.5138
+                },
+                {
+                    "x": -302.8976,
+                    "y": 145.882,
+                    "z": 260.6753
+                },
+                {
+                    "x": -289.166,
+                    "y": 145.882,
+                    "z": 227.7197
+                }
+            ]
+        },
+        {
+            "name": "AI_Spawner0",
+            "ObjId": 280,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -326.9204,
+                "y": 147.78819,
+                "z": 202.0228
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner0"
+        },
+        {
+            "name": "AI_Spawner1",
+            "ObjId": 181,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -240.2326,
+                "y": 141.15329,
+                "z": 274.283
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner1"
+        },
+        {
+            "name": "AI_Spawner2",
+            "ObjId": 182,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -411.443,
+                "y": 145.203915,
+                "z": 231.80782
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner2"
+        },
+        {
+            "name": "AI_Spawner3",
+            "ObjId": 183,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -415.1398,
+                "y": 143.77847,
+                "z": 205.6739
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner3"
+        },
+        {
+            "name": "AI_Spawner4",
+            "ObjId": 184,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -253.1722,
+                "y": 141.02063,
+                "z": 297.024
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner4"
+        },
+        {
+            "name": "AI_Spawner5",
+            "ObjId": 185,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -229.4049,
+                "y": 141.08964,
+                "z": 255.7844
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner5"
+        },
+        {
+            "name": "AI_Spawner6",
+            "ObjId": 186,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -401.339,
+                "y": 141.90187,
+                "z": 188.8938
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner6"
+        },
+        {
+            "name": "AI_Spawner7",
+            "ObjId": 187,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -373.6654,
+                "y": 144.09329,
+                "z": 217.5355
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner7"
+        },
+        {
+            "name": "AI_Spawner8",
+            "ObjId": 188,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -368.5608,
+                "y": 144.07364,
+                "z": 207.2692
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner8"
+        },
+        {
+            "name": "AI_Spawner9",
+            "ObjId": 189,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -271.4011,
+                "y": 141.12268,
+                "z": 278.5193
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner9"
+        },
+        {
+            "name": "AI_Spawner10",
+            "ObjId": 190,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -252.6333,
+                "y": 141.19311,
+                "z": 244.84485
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner10"
+        },
+        {
+            "name": "AI_Spawner11",
+            "ObjId": 191,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -287.7768,
+                "y": 146.044292,
+                "z": 260.8609
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner11"
+        },
+        {
+            "name": "AI_Spawner12",
+            "ObjId": 192,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -278.4089,
+                "y": 146.041988,
+                "z": 240.360674
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner12"
+        },
+        {
+            "name": "AI_Spawner13",
+            "ObjId": 193,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -340.962,
+                "y": 147.78819,
+                "z": 195.2469
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner13"
+        },
+        {
+            "name": "AI_Spawner14",
+            "ObjId": 194,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -347.308,
+                "y": 147.78819,
+                "z": 251.4153
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner14"
+        },
+        {
+            "name": "AI_Spawner15",
+            "ObjId": 195,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -360.4532,
+                "y": 147.78819,
+                "z": 248.67108
+            },
+            "id": "Sector/CapturePoint2/AI_Spawner15"
+        },
+        {
+            "name": "SpawnPoint",
+            "type": "SpawnPoint",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -360.5858,
+                "y": 133.2431,
+                "z": 217.1931
+            },
+            "id": "Sector/CapturePoint2/SpawnPoint"
+        },
+        {
+            "name": "SpawnPoint2",
+            "type": "SpawnPoint",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -247.6887,
+                "y": 130.4998,
+                "z": 273.8813
+            },
+            "id": "Sector/CapturePoint2/SpawnPoint2"
+        },
+        {
+            "name": "CapturePoint3",
+            "ObjId": 300,
+            "InfantrySpawnPoints_Team1": [
+                "Sector/CapturePoint3/SpawnPoint",
+                "Sector/CapturePoint3/SpawnPoint2"
+            ],
+            "InfantrySpawnPoints_Team2": [
+                "Sector/CapturePoint3/SpawnPoint",
+                "Sector/CapturePoint3/SpawnPoint2"
+            ],
+            "CaptureArea": "Sector/CapturePoint3/PolygonVolume",
+            "type": "CapturePoint",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -268.81,
+                "y": 146.383,
+                "z": 178.912
+            },
+            "id": "Sector/CapturePoint3",
+            "linked": [
+                "CaptureArea",
+                "InfantrySpawnPoints_Team1",
+                "InfantrySpawnPoints_Team2"
+            ]
+        },
+        {
+            "name": "PolygonVolume",
+            "type": "PolygonVolume",
+            "id": "Sector/CapturePoint3/PolygonVolume",
+            "height": 3,
+            "points": [
+                {
+                    "x": -269.488589,
+                    "y": 146.383,
+                    "z": 152.0633
+                },
+                {
+                    "x": -297.0913,
+                    "y": 146.383,
+                    "z": 176.70865
+                },
+                {
+                    "x": -261.99643,
+                    "y": 146.383,
+                    "z": 208.8461
+                },
+                {
+                    "x": -238.1397,
+                    "y": 146.383,
+                    "z": 184.39799
+                }
+            ]
+        },
+        {
+            "name": "AI_Spawner0",
+            "ObjId": 380,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -305.0762,
+                "y": 146.556737,
+                "z": 129.7957
+            },
+            "id": "Sector/CapturePoint3/AI_Spawner0"
+        },
+        {
+            "name": "AI_Spawner1",
+            "ObjId": 381,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -174.1437,
+                "y": 139.92183,
+                "z": 218.5009
+            },
+            "id": "Sector/CapturePoint3/AI_Spawner1"
+        },
+        {
+            "name": "AI_Spawner2",
+            "ObjId": 382,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -333.9993,
+                "y": 143.97246,
+                "z": 150.1837
+            },
+            "id": "Sector/CapturePoint3/AI_Spawner2"
+        },
+        {
+            "name": "AI_Spawner3",
+            "ObjId": 383,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -319.2935,
+                "y": 142.54702,
+                "z": 140.1031
+            },
+            "id": "Sector/CapturePoint3/AI_Spawner3"
+        },
+        {
+            "name": "AI_Spawner4",
+            "ObjId": 384,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -225.8463,
+                "y": 139.78917,
+                "z": 238.1095
+            },
+            "id": "Sector/CapturePoint3/AI_Spawner4"
+        },
+        {
+            "name": "SpawnPoint",
+            "type": "SpawnPoint",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -311.1148,
+                "y": 138.70235,
+                "z": 156.4481
+            },
+            "id": "Sector/CapturePoint3/SpawnPoint"
+        },
+        {
+            "name": "SpawnPoint2",
+            "type": "SpawnPoint",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -198.2177,
+                "y": 138.58234,
+                "z": 213.1363
+            },
+            "id": "Sector/CapturePoint3/SpawnPoint2"
+        },
+        {
+            "name": "CapturePoint4",
+            "ObjId": 400,
+            "InfantrySpawnPoints_Team1": [
+                "Sector/CapturePoint4/SpawnPoint",
+                "Sector/CapturePoint4/SpawnPoint2"
+            ],
+            "InfantrySpawnPoints_Team2": [
+                "Sector/CapturePoint4/SpawnPoint",
+                "Sector/CapturePoint4/SpawnPoint2"
+            ],
+            "CaptureArea": "Sector/CapturePoint4/PolygonVolume",
+            "type": "CapturePoint",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -322.553,
+                "y": 146.406,
+                "z": 326.493
+            },
+            "id": "Sector/CapturePoint4",
+            "linked": [
+                "CaptureArea",
+                "InfantrySpawnPoints_Team1",
+                "InfantrySpawnPoints_Team2"
+            ]
+        },
+        {
+            "name": "PolygonVolume",
+            "type": "PolygonVolume",
+            "id": "Sector/CapturePoint4/PolygonVolume",
+            "height": 3,
+            "points": [
+                {
+                    "x": -296.476,
+                    "y": 146.406,
+                    "z": 306.918
+                },
+                {
+                    "x": -345.8684,
+                    "y": 146.406,
+                    "z": 307.07
+                },
+                {
+                    "x": -345.7219,
+                    "y": 146.406,
+                    "z": 351.7024
+                },
+                {
+                    "x": -296.0201,
+                    "y": 146.406,
+                    "z": 351.9031
+                }
+            ]
+        },
+        {
+            "name": "AI_Spawner0",
+            "ObjId": 480,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -358.8192,
+                "y": 146.579737,
+                "z": 277.3767
+            },
+            "id": "Sector/CapturePoint4/AI_Spawner0"
+        },
+        {
+            "name": "AI_Spawner1",
+            "ObjId": 481,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -227.8867,
+                "y": 139.94483,
+                "z": 366.0819
+            },
+            "id": "Sector/CapturePoint4/AI_Spawner1"
+        },
+        {
+            "name": "AI_Spawner2",
+            "ObjId": 482,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -387.7423,
+                "y": 143.99546,
+                "z": 297.7647
+            },
+            "id": "Sector/CapturePoint4/AI_Spawner2"
+        },
+        {
+            "name": "AI_Spawner3",
+            "ObjId": 483,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -373.0365,
+                "y": 142.57002,
+                "z": 287.6841
+            },
+            "id": "Sector/CapturePoint4/AI_Spawner3"
+        },
+        {
+            "name": "AI_Spawner4",
+            "ObjId": 484,
+            "type": "AI_Spawner",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -279.5893,
+                "y": 139.81217,
+                "z": 385.6905
+            },
+            "id": "Sector/CapturePoint4/AI_Spawner4"
+        },
+        {
+            "name": "SpawnPoint",
+            "type": "SpawnPoint",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -364.8578,
+                "y": 138.72535,
+                "z": 304.0291
+            },
+            "id": "Sector/CapturePoint4/SpawnPoint"
+        },
+        {
+            "name": "SpawnPoint2",
+            "type": "SpawnPoint",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": -251.9607,
+                "y": 138.60534,
+                "z": 360.7173
+            },
+            "id": "Sector/CapturePoint4/SpawnPoint2"
+        },
+        {
+            "name": "capture_A_spawners_count",
+            "ObjId": 170,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 16,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/AISpawnersConfig/capture_A_spawners_count"
+        },
+        {
+            "name": "capture_A_spawners_count2",
+            "ObjId": 270,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 16,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/AISpawnersConfig/capture_A_spawners_count2"
+        },
+        {
+            "name": "capture_A_spawners_count3",
+            "ObjId": 370,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 5,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/AISpawnersConfig/capture_A_spawners_count3"
+        },
+        {
+            "name": "capture_A_spawners_count4",
+            "ObjId": 470,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 5,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/AISpawnersConfig/capture_A_spawners_count4"
+        },
+        {
+            "name": "WINNING_SCORE",
+            "ObjId": 900001,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 999,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/GameParameters/WINNING_SCORE"
+        },
+        {
+            "name": "CAPTURE_POINT_DURATION",
+            "ObjId": 900002,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 10,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/GameParameters/CAPTURE_POINT_DURATION"
+        },
+        {
+            "name": "MaxCaptureMultiplier",
+            "ObjId": 900003,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 1,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/GameParameters/MaxCaptureMultiplier"
+        },
+        {
+            "name": "MAX_PLAYER_COUNT",
+            "ObjId": 900004,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 48,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/GameParameters/MAX_PLAYER_COUNT"
+        },
+        {
+            "name": "RoundDurationMinutes",
+            "ObjId": 900005,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 30,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/GameParameters/RoundDurationMinutes"
+        },
+        {
+            "name": "MinimumDistanceToRevive",
+            "ObjId": 900006,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 2,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/GameParameters/MinimumDistanceToRevive"
+        },
+        {
+            "name": "MinimumDistanceToDetectEnemies",
+            "ObjId": 900007,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 30,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/GameParameters/MinimumDistanceToDetectEnemies"
+        },
+        {
+            "name": "MinimumDistanceToEnterVehicle",
+            "ObjId": 900008,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 100,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/GameParameters/MinimumDistanceToEnterVehicle"
+        },
+        {
+            "name": "AIDifficultyPercentage",
+            "ObjId": 900009,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 33,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/GameParameters/AIDifficultyPercentage"
+        },
+        {
+            "name": "OBJECT_OFFSET",
+            "ObjId": 900010,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 70,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/GameParameters/OBJECT_OFFSET"
+        },
+        {
+            "name": "SPAWN_OBJECT_OFFSET",
+            "ObjId": 900011,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 80,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/GameParameters/SPAWN_OBJECT_OFFSET"
+        },
+        {
+            "name": "HQ1_AI_SPAWNERS_COUNT",
+            "ObjId": 900012,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 6,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/GameParameters/HQ1_AI_SPAWNERS_COUNT"
+        },
+        {
+            "name": "HQ2_AI_SPAWNERS_COUNT",
+            "ObjId": 900013,
+            "type": "BallGo01",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 6,
+                "y": -10,
+                "z": 0
+            },
+            "id": "GameConfig/GameParameters/HQ2_AI_SPAWNERS_COUNT"
+        }
+    ],
+    "Static": [
+        {
+            "name": "MP_Granite_TechCampus_Portal_Terrain",
+            "metadata/_edit_lock_": true,
+            "type": "MP_Granite_TechCampus_Portal_Terrain",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "id": "Static/MP_Granite_TechCampus_Portal_Terrain"
+        },
+        {
+            "name": "MP_Granite_TechCampus_Portal_Assets",
+            "metadata/_edit_lock_": true,
+            "type": "MP_Granite_TechCampus_Portal_Assets",
+            "right": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "up": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "front": {
+                "x": 0,
+                "y": 0,
+                "z": 1
+            },
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "id": "Static/MP_Granite_TechCampus_Portal_Assets"
+        }
+    ]
+}
